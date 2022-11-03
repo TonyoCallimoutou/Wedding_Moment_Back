@@ -2,9 +2,10 @@ const sql = require("./db.js");
 
 // constructor
 const User = function(user) {
-  this.userId = user.UserId;
-  this.firstName = user.FirstName;
-  this.lastName = user.LastName;
+  this.userId = user.userId;
+  this.firstName = user.firstName;
+  this.lastName = user.lastName;
+  this.email = user.email;
   this.password = user.password;
   this.picture = user.picture;
 };
