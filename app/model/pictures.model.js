@@ -1,4 +1,5 @@
 const sql = require("./db.js");
+const pictureUtils = require("../config/picture.utils.js")
 
 // constructor
 const Picture = function(picture) {
@@ -8,7 +9,7 @@ const Picture = function(picture) {
 };
 
 Picture.create = (newPicture, result) => {
-  sql.query("INSERT INTO pictures SET ?", newPicture, (err, res) => {
+  sql.query(pictureUtils.sqlCreatePicture(newPicture), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -29,7 +30,6 @@ Picture.getPictureById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found picture: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -48,7 +48,6 @@ Picture.getAll = (result) => {
       result(null, err);
       return;
     }
-    console.log("pictures: ", res);
     result(null, res);
   });
 };

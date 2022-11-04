@@ -46,5 +46,5 @@ server.on('listening', () => {
 });
 
 server.listen(port, () => {
-  console.log('Server.js is running on port ${PORT}.')
+  console.log('Server is running')
 });

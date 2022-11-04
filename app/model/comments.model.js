@@ -1,4 +1,5 @@
 const sql = require("./db.js");
+const commentUtils = require("../config/comment.utils.js")
 
 // constructor
 const Comment = function(comment) {
@@ -9,7 +10,7 @@ const Comment = function(comment) {
 };
 
 Comment.create = (newComment, result) => {
-  sql.query("INSERT INTO Comments SET ?", newComment, (err, res) => {
+  sql.query(commentUtils.sqlCreateComment(newComment), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -30,7 +31,6 @@ Comment.getCommentById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found comment: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -47,7 +47,6 @@ Comment.getCommentsByUserId = (id, result) => {
       result(null, err);
       return;
     }
-    console.log("comments: ", res);
     result(null, res);
   });
 };
@@ -81,7 +80,6 @@ Comment.getAll = (result) => {
         result(null, err);
         return;
       }
-      console.log("Comments: ", res);
       result(null, res);
     });
 };

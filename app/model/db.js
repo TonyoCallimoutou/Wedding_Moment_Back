@@ -16,10 +16,10 @@ connection.connect(error => {
 
 async function query(sql, params) {
   try {
-    const [results, ] = await connection.execute(sql, params);
-    return results;
+    return await connection.execute(sql, params);
   } catch (err) {
     console.error(`Error db.js `, err.message);
+    console.error(`db.js :`, sql + " + " + params);
   }
 }
 

@@ -13,10 +13,6 @@ app.use(
 
 app.use(cors({origin: 'http://localhost:4200'}));
 
-app.get("/", (req, res) => {
-  res.json({ message: "Test reusi app.js" });
-});
-
 require("./app/routes/users.routes.js")(app);
 require("./app/routes/comments.routes.js")(app);
 require("./app/routes/pictures.routes.js")(app);

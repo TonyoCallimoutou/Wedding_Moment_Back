@@ -1,4 +1,6 @@
+const { UserUtils } = require("../config/user.utils.js");
 const sql = require("./db.js");
+const userUtils = require("../config/user.utils.js");
 
 // constructor
 const User = function(user) {
@@ -10,8 +12,10 @@ const User = function(user) {
   this.picture = user.picture;
 };
 
+
+
 User.create = (newUser, result) => {
-  sql.query("INSERT INTO users SET ?", newUser, (err, res) => {
+  sql.query(userUtils.sqlCreateUser(newUser), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -32,7 +36,6 @@ User.getUserById = (id, result) => {
     }
 
     if (res.length) {
-      console.log("found user: ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -51,7 +54,6 @@ User.getAll = (result) => {
       result(null, err);
       return;
     }
-    console.log("users: ", res);
     result(null, res);
   });
 };
