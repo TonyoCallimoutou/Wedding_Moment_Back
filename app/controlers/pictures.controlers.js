@@ -12,7 +12,7 @@ exports.create = (req, res) => {
       const picture = new Pictures({
         pictureId: req.body.pictureId,
         userId: req.body.userId,
-        picture: req.body.picture,
+        pictureUrl: req.body.pictureUrl,
 
       });
     

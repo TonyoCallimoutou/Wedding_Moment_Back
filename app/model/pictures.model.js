@@ -5,7 +5,7 @@ const pictureUtils = require("../config/picture.utils.js")
 const Picture = function(picture) {
   this.pictureId = picture.pictureId;
   this.userId = picture.userId
-  this.picture = picture.picture;
+  this.pictureUrl = picture.pictureUrl;
 };
 
 Picture.create = (newPicture, result) => {

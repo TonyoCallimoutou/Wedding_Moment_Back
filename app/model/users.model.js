@@ -5,11 +5,10 @@ const userUtils = require("../config/user.utils.js");
 // constructor
 const User = function(user) {
   this.userId = user.userId;
-  this.firstName = user.firstName;
-  this.lastName = user.lastName;
   this.email = user.email;
-  this.password = user.password;
-  this.picture = user.picture;
+  this.userName = user.userName;
+  this.photoUrl = user.photoUrl;
+  this.emailVerified = user.emailVerified;
 };
 
 
