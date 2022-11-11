@@ -13,7 +13,8 @@ exports.create = (req, res) => {
         pictureId: req.body.pictureId,
         userId: req.body.userId,
         pictureUrl: req.body.pictureUrl,
-
+        countLike: req.body.countLike,
+        countComment: req.body.countComment
       });
     
       // Save Picture in the database

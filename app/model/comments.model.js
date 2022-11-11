@@ -19,11 +19,12 @@ Comment.create = (newComment, result) => {
 
     console.log("created Comment: ", { id: res.insertId, ...newComment });
     result(null, { id: res.insertId, ...newComment });
+
   });
 };
 
 Comment.getCommentById = (id, result) => {
-  sql.query(`SELECT * FROM Comments WHERE commentId = ${id}`, (err, res) => {
+  sql.query(commentUtils.sqlGetCommentById(id), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -41,7 +42,18 @@ Comment.getCommentById = (id, result) => {
 };
 
 Comment.getCommentsByUserId = (id, result) => {
-  sql.query(`SELECT * FROM Comments WHERE userId = ${id}`, (err, res) => {
+  sql.query(commentUtils.sqlGetCommentsByUserId(id), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    result(null, res);
+  });
+};
+
+Comment.getAll = (result) => {
+  sql.query(commentUtils.sqlGetAll(), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -53,7 +65,7 @@ Comment.getCommentsByUserId = (id, result) => {
 
 
 Comment.delete = (id, result) => {
-  sql.query(`DELETE FROM Comments WHERE commentId = ${id}`, (err, res) => {
+  sql.query(commentUtils.sqlDelete(id), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -69,19 +81,6 @@ Comment.delete = (id, result) => {
     console.log("deleted comment with id: ", id);
     result(null, res);
   });
-};
-
-Comment.getAll = (result) => {
-    let query = "SELECT * FROM Comments";
-  
-    sql.query(query, (err, res) => {
-      if (err) {
-        console.log("error: ", err);
-        result(null, err);
-        return;
-      }
-      result(null, res);
-    });
 };
 
 module.exports = Comment;

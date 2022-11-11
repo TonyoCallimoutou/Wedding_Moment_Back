@@ -27,7 +27,7 @@ User.create = (newUser, result) => {
 };
 
 User.getUserById = (id, result) => {
-  sql.query(`SELECT * FROM users WHERE userId = ${id}`, (err, res) => {
+  sql.query(userUtils.sqlGetUserById(id), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -45,9 +45,7 @@ User.getUserById = (id, result) => {
 };
 
 User.getAll = (result) => {
-  let query = "SELECT * FROM Users";
-
-  sql.query(query, (err, res) => {
+  sql.query(userUtils.sqlGetAll(), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -57,9 +55,53 @@ User.getAll = (result) => {
   });
 };
 
+User.getLikesPictures = (id, result) => {
+  sql.query(userUtils.sqlGetLikesPictures(id), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      result(null, res);
+      return;
+    }
+
+    // not found Tutorial with the id
+    result({ kind: "not_found" }, null);
+  });
+};
+
+User.addLikesPicture = (userId, pictureId, result) => {
+  sql.query(userUtils.sqlAddLikesPicture(userId, pictureId), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    console.log("like picture: ", { id: res.insertId, ...pictureId });
+    result(null, { id: res.insertId, ...pictureId });
+  });
+};
+
+User.dislikesPicture = (userId, pictureId, result) => {
+  sql.query(userUtils.sqlDislikesPicture(userId, pictureId), (err, res) => {
+    if (err) {
+      console.log("erreur: ", err);
+      result(err, null);
+      return;
+    }
+
+    console.log("like picture: ", { id: res.insertId, ...pictureId });
+    result(null, { id: res.insertId, ...pictureId });
+  });
+};
+
 
 User.delete = (id, result) => {
-  sql.query(`DELETE FROM users WHERE userId = ${id}`, (err, res) => {
+  sql.query(userUtils.sqlDelete(id), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

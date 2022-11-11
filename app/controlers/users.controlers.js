@@ -1,4 +1,5 @@
 const Users = require("../model/users.model.js");
+const Pictures = require("../model/pictures.model.js");
 
 // Create and Save a new User
 exports.create = (req, res) => {
@@ -24,7 +25,10 @@ exports.create = (req, res) => {
             message:
               err.message || "Some error occurred while creating the User."
           });
-        else res.send(data);
+        else {
+          res.send(data);
+          
+        }
       });
 };
 
@@ -53,6 +57,76 @@ exports.getAll = (req, res) => {
             });
         else res.send(data);
     });
+};
+
+// Retrieve listOfLikePicture
+exports.getLikesPictures = (req, res) => {
+  const id = req.params.id;
+
+  Users.getLikesPictures(id, (err, data) => {
+      if (err)
+          res.status(500).send({
+          message:
+              err.message || "Some error occurred while retrieving LikePicture."
+          });
+      else res.send(data);
+  });
+};
+
+// Add pictures in listOfLikePicture
+exports.addLikesPicture = (req, res) => {
+    
+  if (!req.body) {
+      res.status(400).send({
+        message: "Content can not be empty!"
+      });
+    }
+
+    Users.addLikesPicture(req.body.userId, req.body.pictureId, (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while creating the User."
+        });
+      else {
+        res.send(data);
+        Pictures.likePicture(req.body.pictureId,(err, data) => {
+          if (err)
+            res.status(500).send({
+              message:
+                err.message || "Some error occurred while creating the User."
+            });
+          });
+      }
+    });
+};
+
+// Delete pictures in listOfLikePicture
+exports.dislikesPicture = (req, res) => {
+
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+  }
+
+  Users.dislikesPicture(req.body.userId, req.body.pictureId, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the User."
+      });
+    else {
+      res.send(data);
+      Pictures.dislikePicture(req.body.pictureId,(err, data) => {
+        if (err)
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while creating the User."
+          });
+        });
+    }
+  });
 };
 
 

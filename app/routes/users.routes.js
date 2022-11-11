@@ -11,6 +11,15 @@ module.exports = app => {
 
     // Retrieve User by id
     router.get("/:id", users.getUserById);
+
+    // Retrieve listOfLikePicture
+    router.get("/likesPicture/:id", users.getLikesPictures);
+
+    // Add pictures in listOfLikePicture
+    router.post("/likesPicture", users.addLikesPicture);
+
+    // delete pictures in listOfLikePicture
+    router.post("/dislikesPicture", users.dislikesPicture);
   
     // Delete a Users with id
     router.delete("/:id", users.delete);

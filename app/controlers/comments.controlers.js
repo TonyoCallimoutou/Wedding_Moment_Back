@@ -1,4 +1,6 @@
 const Comments = require("../model/comments.model.js");
+const Pictures = require("../model/pictures.model.js");
+
 
 // Create and Save a new Comment
 exports.create = (req, res) => {
@@ -23,7 +25,16 @@ exports.create = (req, res) => {
             message:
               err.message || "Some error occurred while creating the Comment."
           });
-        else res.send(data);
+        else {
+          res.send(data);
+          Pictures.commentPicture(comment.pictureId, (err, data) => {
+            if (err)
+              res.status(500).send({
+                message:
+                  err.message || "Some error occurred while add comment to picture."
+              });
+          });
+        };
       });
 };
 

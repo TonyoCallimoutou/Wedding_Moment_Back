@@ -6,6 +6,8 @@ const Picture = function(picture) {
   this.pictureId = picture.pictureId;
   this.userId = picture.userId
   this.pictureUrl = picture.pictureUrl;
+  this.countLike = picture.countLike;
+  this.countComment = picture.countComment;
 };
 
 Picture.create = (newPicture, result) => {
@@ -22,7 +24,7 @@ Picture.create = (newPicture, result) => {
 };
 
 Picture.getPictureById = (id, result) => {
-  sql.query(`SELECT * FROM pictures WHERE pictureId = ${id}`, (err, res) => {
+  sql.query(pictureUtils.sqlGetPictureById(id), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -40,9 +42,7 @@ Picture.getPictureById = (id, result) => {
 };
 
 Picture.getAll = (result) => {
-  let query = "SELECT * FROM pictures";
-
-  sql.query(query, (err, res) => {
+  sql.query(pictureUtils.sqlGetAll(), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -52,9 +52,42 @@ Picture.getAll = (result) => {
   });
 };
 
+Picture.commentPicture = (id, result) => {
+  sql.query(pictureUtils.sqlCommentPicture(id), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    result(null, res);
+  });
+}
+
+Picture.likePicture = (id, result) => {
+  sql.query(pictureUtils.sqlLikePicture(id), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    result(null, res);
+  });
+}
+
+Picture.dislikePicture = (id, result) => {
+  sql.query(pictureUtils.sqlDislikePicture(id), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    result(null, res);
+  });
+}
+
 
 Picture.delete = (id, result) => {
-  sql.query(`DELETE FROM pictures WHERE pictureId = ${id}`, (err, res) => {
+  sql.query(pictureUtils.sqlDelete(id), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
