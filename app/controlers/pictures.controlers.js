@@ -11,10 +11,13 @@ exports.create = (req, res) => {
     
       const picture = new Pictures({
         pictureId: req.body.pictureId,
-        userId: req.body.userId,
         pictureUrl: req.body.pictureUrl,
         countLike: req.body.countLike,
-        countComment: req.body.countComment
+        countComment: req.body.countComment,
+        userId: req.body.userId,
+        userName: req.body.userName,
+        photoUrl: req.body.photoUrl,
+
       });
     
       // Save Picture in the database

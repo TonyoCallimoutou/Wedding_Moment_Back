@@ -3,12 +3,12 @@ class PictureUtils {
         return `INSERT INTO pictures (userId, pictureUrl) Values (${data.userId},'${data.pictureUrl}')`
     }
 
-    static sqlGetPictureById(data){
-        return `SELECT * FROM pictures WHERE pictureId = ${id}`
+    static sqlGetPictureById(id){
+        return `SELECT * FROM pictures NATURAL JOIN users WHERE pictureId = ${id}`
     }
 
     static sqlGetAll(){
-        return `SELECT * FROM pictures`
+        return `SELECT * FROM pictures NATURAL JOIN users`
     }
 
     static sqlCommentPicture(pictureId) {
