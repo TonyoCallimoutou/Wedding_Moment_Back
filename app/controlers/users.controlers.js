@@ -1,5 +1,7 @@
 const Users = require("../model/users.model.js");
 const Pictures = require("../model/pictures.model.js");
+const Comments = require("../model/comments.model.js");
+
 
 // Create and Save a new User
 exports.create = (req, res) => {
@@ -119,6 +121,76 @@ exports.dislikesPicture = (req, res) => {
     else {
       res.send(data);
       Pictures.dislikePicture(req.body.pictureId,(err, data) => {
+        if (err)
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while creating the User."
+          });
+        });
+    }
+  });
+};
+
+// Retrieve listOfLikeComment
+exports.getLikesComments = (req, res) => {
+  const id = req.params.id;
+
+  Users.getLikesComments(id, (err, data) => {
+      if (err)
+          res.status(500).send({
+          message:
+              err.message || "Some error occurred while retrieving LikePicture."
+          });
+      else res.send(data);
+  });
+};
+
+// Add Comments in listOfLikeComments
+exports.addLikesComment = (req, res) => {
+    
+  if (!req.body) {
+      res.status(400).send({
+        message: "Content can not be empty!"
+      });
+    }
+
+    Users.addLikesComment(req.body.userId, req.body.commentId, (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while creating the User."
+        });
+      else {
+        res.send(data);
+        Comments.likeComment(req.body.commentId,(err, data) => {
+          if (err)
+            res.status(500).send({
+              message:
+                err.message || "Some error occurred while creating the User."
+            });
+          });
+      }
+    });
+};
+
+// Delete pictures in listOfLikePicture
+exports.dislikesComment = (req, res) => {
+
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+  }
+
+  Users.dislikesComment(req.body.userId, req.body.commentId, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the User."
+      });
+    else {
+      res.send(data);
+      Comments.dislikeComment(req.body.commentId,(err, data) => {
         if (err)
           res.status(500).send({
             message:

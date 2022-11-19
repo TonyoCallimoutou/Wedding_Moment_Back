@@ -14,8 +14,11 @@ exports.create = (req, res) => {
       const comment = new Comments({
         commentId : req.body.commentId,
         pictureId : req.body.pictureId,
-        userId : req.body.userId,
         comment : req.body.comment,
+        countLikecomment : req.body.countLikecomment,
+        userId : req.body.userId,
+        userName: req.body.userName,
+        photoUrl: req.body.photoUrl,
       });
     
       // Save Comment in the database
@@ -53,10 +56,10 @@ exports.getCommentsById = (req, res) => {
 };
 
 // Retrieve Comment by userId.
-exports.getCommentsByUserId = (req, res) => {
+exports.getCommentsByPictureId = (req, res) => {
     const id = req.params.id;
 
-    Comments.getCommentsByUserId(id, (err, data) => {
+    Comments.getCommentsByPictureId(id, (err, data) => {
         if (err)
             res.status(500).send({
             message:

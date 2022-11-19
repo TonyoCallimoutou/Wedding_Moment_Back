@@ -7,6 +7,7 @@ const Comment = function(comment) {
   this.pictureId = comment.pictureId;
   this.userId = comment.userId;
   this.comment = comment.comment;
+  this.countLikeComment = comment.countLikeComment;
 };
 
 Comment.create = (newComment, result) => {
@@ -41,8 +42,8 @@ Comment.getCommentById = (id, result) => {
   });
 };
 
-Comment.getCommentsByUserId = (id, result) => {
-  sql.query(commentUtils.sqlGetCommentsByUserId(id), (err, res) => {
+Comment.getCommentsByPictureId = (id, result) => {
+  sql.query(commentUtils.sqlGetCommentsByPictureId(id), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -62,6 +63,28 @@ Comment.getAll = (result) => {
     result(null, res);
   });
 };
+
+Comment.likeComment = (id, result) => {
+  sql.query(commentUtils.sqlLikeComment(id), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    result(null, res);
+  });
+}
+
+Comment.dislikeComment = (id, result) => {
+  sql.query(commentUtils.sqlDislikeComment(id), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    result(null, res);
+  });
+}
 
 
 Comment.delete = (id, result) => {

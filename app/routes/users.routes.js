@@ -20,6 +20,15 @@ module.exports = app => {
 
     // delete pictures in listOfLikePicture
     router.post("/dislikesPicture", users.dislikesPicture);
+
+    // Retrieve listOfLikeComment
+    router.get("/likesComment/:id", users.getLikesComments);
+
+    // Add comments in listOfLikeComment
+    router.post("/likesComment", users.addLikesComment);
+
+    // delete comments in listOfLikeComment
+    router.post("/dislikesComment", users.dislikesComment);
   
     // Delete a Users with id
     router.delete("/:id", users.delete);

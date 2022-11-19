@@ -99,6 +99,50 @@ User.dislikesPicture = (userId, pictureId, result) => {
   });
 };
 
+User.getLikesComments = (id, result) => {
+  sql.query(userUtils.sqlGetLikesComments(id), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      result(null, res);
+      return;
+    }
+
+    // not found Tutorial with the id
+    result({ kind: "not_found" }, null);
+  });
+};
+
+User.addLikesComment = (userId, commentId, result) => {
+  sql.query(userUtils.sqlAddLikesComment(userId, commentId), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    console.log("like comment: ", { id: res.insertId, ...commentId });
+    result(null, { id: res.insertId, ...commentId });
+  });
+};
+
+User.dislikesComment = (userId, commentId, result) => {
+  sql.query(userUtils.sqlDislikesComment(userId, commentId), (err, res) => {
+    if (err) {
+      console.log("erreur: ", err);
+      result(err, null);
+      return;
+    }
+
+    console.log("like comment: ", { id: res.insertId, ...commentId });
+    result(null, { id: res.insertId, ...commentId });
+  });
+};
+
 
 User.delete = (id, result) => {
   sql.query(userUtils.sqlDelete(id), (err, res) => {

@@ -10,7 +10,7 @@ module.exports = app => {
     router.get("/:id", comments.getCommentsById);
 
     // Retrieve Comment by Userid
-    router.get("/user/:id", comments.getCommentsByUserId);
+    router.get("/picture/:id", comments.getCommentsByPictureId);
 
     // Retrieve All Comments
     router.get("/", comments.getAll)

@@ -23,6 +23,18 @@ class UserUtils {
         return `DELETE FROM UsersLikesPictures WHERE userId = '${userId}' AND pictureId = '${pictureId}'`
     }
 
+    static sqlGetLikesComments(id) {
+        return `SELECT commentId FROM UsersLikesComments WHERE userId = "${id}"`
+    }
+    
+    static sqlAddLikesComment(userId, commentId) {
+        return `INSERT INTO UsersLikesComments (userId, commentId) Values ('${userId}','${commentId}')`
+    }
+
+    static sqlDislikesComment(userId, commentId) {
+        return `DELETE FROM UsersLikesComments WHERE userId = '${userId}' AND commentId = '${commentId}'`
+    }
+
     static sqlDelete(id) {
         return `DELETE FROM users WHERE userId = ${id}`
     }
