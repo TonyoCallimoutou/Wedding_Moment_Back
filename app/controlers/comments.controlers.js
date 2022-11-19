@@ -55,7 +55,7 @@ exports.getCommentsById = (req, res) => {
     });
 };
 
-// Retrieve Comment by userId.
+// Retrieve Comment by pictureId.
 exports.getCommentsByPictureId = (req, res) => {
     const id = req.params.id;
 
@@ -86,14 +86,26 @@ exports.delete = (req, res) => {
       });
 };
 
+// Get all Comments
 exports.getAll = (req, res) => {
 
-    Comments.getAll((err, data) => {
-        if (err)
+  Comments.getAll((err, data) => {
+      if (err)
+          res.status(500).send({
+          message:
+              err.message || "Some error occurred while retrieving comment."
+          });
+      else {
+        Pictures.deleteCommentPicture(comment.pictureId, (err, data) => {
+          if (err)
             res.status(500).send({
-            message:
-                err.message || "Some error occurred while retrieving comment."
+              message:
+                err.message || "Some error occurred while add comment to picture."
             });
-        else res.send(data);
-    });
+          else {
+            res.send(data);
+          }
+        });
+      }
+  });
 };

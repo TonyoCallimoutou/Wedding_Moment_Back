@@ -10,6 +10,7 @@ const Picture = function(picture) {
   this.countComment = picture.countComment;
 };
 
+// Create and Save a new Picture
 Picture.create = (newPicture, result) => {
   sql.query(pictureUtils.sqlCreatePicture(newPicture), (err, res) => {
     if (err) {
@@ -23,6 +24,7 @@ Picture.create = (newPicture, result) => {
   });
 };
 
+// Retrieve picture by id.
 Picture.getPictureById = (id, result) => {
   sql.query(pictureUtils.sqlGetPictureById(id), (err, res) => {
     if (err) {
@@ -36,11 +38,11 @@ Picture.getPictureById = (id, result) => {
       return;
     }
 
-    // not found Tutorial with the id
     result({ kind: "not_found" }, null);
   });
 };
 
+// Retrieve all Picture
 Picture.getAll = (result) => {
   sql.query(pictureUtils.sqlGetAll(), (err, res) => {
     if (err) {
@@ -52,6 +54,7 @@ Picture.getAll = (result) => {
   });
 };
 
+// Add Comment to picture
 Picture.commentPicture = (id, result) => {
   sql.query(pictureUtils.sqlCommentPicture(id), (err, res) => {
     if (err) {
@@ -63,6 +66,18 @@ Picture.commentPicture = (id, result) => {
   });
 }
 
+Picture.deleteCommentPicture = (id, result) => {
+  sql.query(pictureUtils.sqlDeleteCommentPicture(id), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    result(null, res);
+  });
+}
+
+// Like Picture
 Picture.likePicture = (id, result) => {
   sql.query(pictureUtils.sqlLikePicture(id), (err, res) => {
     if (err) {
@@ -74,6 +89,7 @@ Picture.likePicture = (id, result) => {
   });
 }
 
+// Dislike Picture
 Picture.dislikePicture = (id, result) => {
   sql.query(pictureUtils.sqlDislikePicture(id), (err, res) => {
     if (err) {
@@ -85,7 +101,7 @@ Picture.dislikePicture = (id, result) => {
   });
 }
 
-
+// Delete Picture by Id
 Picture.delete = (id, result) => {
   sql.query(pictureUtils.sqlDelete(id), (err, res) => {
     if (err) {
@@ -95,7 +111,6 @@ Picture.delete = (id, result) => {
     }
 
     if (res.affectedRows == 0) {
-      // not found Tutorial with the id
       result({ kind: "not_found" }, null);
       return;
     }

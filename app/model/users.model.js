@@ -12,7 +12,7 @@ const User = function(user) {
 };
 
 
-
+// Create and Save a new User
 User.create = (newUser, result) => {
   sql.query(userUtils.sqlCreateUser(newUser), (err, res) => {
     if (err) {
@@ -26,6 +26,7 @@ User.create = (newUser, result) => {
   });
 };
 
+// Retrieve user by id.
 User.getUserById = (id, result) => {
   sql.query(userUtils.sqlGetUserById(id), (err, res) => {
     if (err) {
@@ -39,11 +40,11 @@ User.getUserById = (id, result) => {
       return;
     }
 
-    // not found Tutorial with the id
     result({ kind: "not_found" }, null);
   });
 };
 
+// Retrieve all Users.
 User.getAll = (result) => {
   sql.query(userUtils.sqlGetAll(), (err, res) => {
     if (err) {
@@ -55,6 +56,7 @@ User.getAll = (result) => {
   });
 };
 
+// Retrieve listOfLikePicture
 User.getLikesPictures = (id, result) => {
   sql.query(userUtils.sqlGetLikesPictures(id), (err, res) => {
     if (err) {
@@ -68,11 +70,11 @@ User.getLikesPictures = (id, result) => {
       return;
     }
 
-    // not found Tutorial with the id
     result({ kind: "not_found" }, null);
   });
 };
 
+// Add pictures in listOfLikePicture
 User.addLikesPicture = (userId, pictureId, result) => {
   sql.query(userUtils.sqlAddLikesPicture(userId, pictureId), (err, res) => {
     if (err) {
@@ -86,6 +88,7 @@ User.addLikesPicture = (userId, pictureId, result) => {
   });
 };
 
+// Delete pictures in listOfLikePicture
 User.dislikesPicture = (userId, pictureId, result) => {
   sql.query(userUtils.sqlDislikesPicture(userId, pictureId), (err, res) => {
     if (err) {
@@ -99,6 +102,7 @@ User.dislikesPicture = (userId, pictureId, result) => {
   });
 };
 
+// Retrieve listOfLikeComment
 User.getLikesComments = (id, result) => {
   sql.query(userUtils.sqlGetLikesComments(id), (err, res) => {
     if (err) {
@@ -112,11 +116,11 @@ User.getLikesComments = (id, result) => {
       return;
     }
 
-    // not found Tutorial with the id
     result({ kind: "not_found" }, null);
   });
 };
 
+// Add Comments in listOfLikeComments
 User.addLikesComment = (userId, commentId, result) => {
   sql.query(userUtils.sqlAddLikesComment(userId, commentId), (err, res) => {
     if (err) {
@@ -130,6 +134,7 @@ User.addLikesComment = (userId, commentId, result) => {
   });
 };
 
+// Delete comment in listOfLikeComment
 User.dislikesComment = (userId, commentId, result) => {
   sql.query(userUtils.sqlDislikesComment(userId, commentId), (err, res) => {
     if (err) {
@@ -143,7 +148,7 @@ User.dislikesComment = (userId, commentId, result) => {
   });
 };
 
-
+// Delete User by Id
 User.delete = (id, result) => {
   sql.query(userUtils.sqlDelete(id), (err, res) => {
     if (err) {
@@ -153,7 +158,6 @@ User.delete = (id, result) => {
     }
 
     if (res.affectedRows == 0) {
-      // not found Tutorial with the id
       result({ kind: "not_found" }, null);
       return;
     }

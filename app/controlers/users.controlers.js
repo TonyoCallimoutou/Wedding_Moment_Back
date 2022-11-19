@@ -48,7 +48,7 @@ exports.getUserById = (req, res) => {
     });
 };
 
-// Retrieve all Tutorials from the database (with condition).
+// Retrieve all Users.
 exports.getAll = (req, res) => {
 
     Users.getAll((err, data) => {
@@ -173,7 +173,7 @@ exports.addLikesComment = (req, res) => {
     });
 };
 
-// Delete pictures in listOfLikePicture
+// Delete comment in listOfLikeComment
 exports.dislikesComment = (req, res) => {
 
   if (!req.body) {

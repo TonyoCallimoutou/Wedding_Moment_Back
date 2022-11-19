@@ -10,6 +10,7 @@ const Comment = function(comment) {
   this.countLikeComment = comment.countLikeComment;
 };
 
+// Create and Save a new Comment
 Comment.create = (newComment, result) => {
   sql.query(commentUtils.sqlCreateComment(newComment), (err, res) => {
     if (err) {
@@ -24,6 +25,7 @@ Comment.create = (newComment, result) => {
   });
 };
 
+// Retrieve Comment by id.
 Comment.getCommentById = (id, result) => {
   sql.query(commentUtils.sqlGetCommentById(id), (err, res) => {
     if (err) {
@@ -37,11 +39,12 @@ Comment.getCommentById = (id, result) => {
       return;
     }
 
-    // not found Tutorial with the id
+    // not found User with the id
     result({ kind: "not_found" }, null);
   });
 };
 
+// Retrieve Comment by pictureId.
 Comment.getCommentsByPictureId = (id, result) => {
   sql.query(commentUtils.sqlGetCommentsByPictureId(id), (err, res) => {
     if (err) {
@@ -53,6 +56,7 @@ Comment.getCommentsByPictureId = (id, result) => {
   });
 };
 
+// Get all Comments
 Comment.getAll = (result) => {
   sql.query(commentUtils.sqlGetAll(), (err, res) => {
     if (err) {
@@ -64,6 +68,7 @@ Comment.getAll = (result) => {
   });
 };
 
+// Like Comment
 Comment.likeComment = (id, result) => {
   sql.query(commentUtils.sqlLikeComment(id), (err, res) => {
     if (err) {
@@ -75,6 +80,7 @@ Comment.likeComment = (id, result) => {
   });
 }
 
+// Dislike Comment
 Comment.dislikeComment = (id, result) => {
   sql.query(commentUtils.sqlDislikeComment(id), (err, res) => {
     if (err) {
@@ -86,7 +92,7 @@ Comment.dislikeComment = (id, result) => {
   });
 }
 
-
+// Delete Comment by id.
 Comment.delete = (id, result) => {
   sql.query(commentUtils.sqlDelete(id), (err, res) => {
     if (err) {

@@ -14,6 +14,10 @@ class PictureUtils {
     static sqlCommentPicture(pictureId) {
         return `UPDATE pictures SET countComment = countComment + 1 WHERE pictureId =  ${pictureId}`
     }
+
+    static sqlDeleteCommentPicture(pictureId) {
+        return `UPDATE pictures SET countComment = countComment - 1 WHERE pictureId =  ${pictureId}`
+    }
     
     static sqlLikePicture(pictureId) {
         return `UPDATE pictures SET countLike = countLike + 1 WHERE pictureId =  ${pictureId}`

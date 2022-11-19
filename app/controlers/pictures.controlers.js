@@ -45,7 +45,7 @@ exports.getPictureById = (req, res) => {
     });
 };
 
-// Retrieve all Tutorials from the database (with condition).
+// Retrieve all Picture
 exports.getAll = (req, res) => {
 
     Pictures.getAll((err, data) => {
