@@ -1,5 +1,8 @@
 const http = require('http');
 const app = require('./app');
+const socketIo = require("socket.io");
+
+const pictures = require("./app/controlers/pictures.controlers.js");
 
 const normalizePort = val => {
     const port = parseInt(val, 10);
@@ -45,6 +48,34 @@ server.on('listening', () => {
     console.log('Listening on ' + bind);
 });
 
+const io = socketIo(server,  {
+    cors: {
+      origin: "*",
+      credentials: true
+    }
+});
+
+
 server.listen(port, () => {
-  console.log('Server is running')
+    console.log('Server is running')
+});
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+
+    socket.on('disconnect', () => {
+      console.log('user disconnected');
+    });
+
+    socket.on('Pictures', () => {
+        io.emit('ListPictures')
+        console.log('refresh list of picture');
+      });
+
+    socket.on('Comments', (pictureId) => {
+        io.emit('ListComments', pictureId)
+        console.log('refresh list of Comment');
+      });
+
+
 });

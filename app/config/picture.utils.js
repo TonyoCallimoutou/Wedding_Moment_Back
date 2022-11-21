@@ -1,6 +1,6 @@
 class PictureUtils {
     static sqlCreatePicture(data){
-        return `INSERT INTO pictures (userId, pictureUrl) Values (${data.userId},'${data.pictureUrl}')`
+        return `INSERT INTO pictures (userId, pictureUrl) Values ('${data.userId}','${data.pictureUrl}')`
     }
 
     static sqlGetPictureById(id){

@@ -103,7 +103,6 @@ exports.getAll = (req, res) => {
                 err.message || "Some error occurred while add comment to picture."
             });
           else {
-            res.send(data);
           }
         });
       }

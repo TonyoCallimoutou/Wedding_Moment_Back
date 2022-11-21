@@ -19,7 +19,6 @@ Comment.create = (newComment, result) => {
       return;
     }
 
-    console.log("created Comment: ", { id: res.insertId, ...newComment });
     result(null, { id: res.insertId, ...newComment });
 
   });
@@ -107,7 +106,6 @@ Comment.delete = (id, result) => {
       return;
     }
 
-    console.log("deleted comment with id: ", id);
     result(null, res);
   });
 };

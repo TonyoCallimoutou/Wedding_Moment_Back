@@ -19,7 +19,6 @@ Picture.create = (newPicture, result) => {
       return;
     }
 
-    console.log("created picture: ", { id: res.insertId, ...newPicture });
     result(null, { id: res.insertId, ...newPicture });
   });
 };
@@ -115,7 +114,6 @@ Picture.delete = (id, result) => {
       return;
     }
 
-    console.log("deleted pictures with id: ", id);
     result(null, res);
   });
 };

@@ -21,7 +21,6 @@ User.create = (newUser, result) => {
       return;
     }
 
-    console.log("created user: ", { id: res.insertId, ...newUser });
     result(null, { id: res.insertId, ...newUser });
   });
 };
@@ -83,7 +82,6 @@ User.addLikesPicture = (userId, pictureId, result) => {
       return;
     }
 
-    console.log("like picture: ", { id: res.insertId, ...pictureId });
     result(null, { id: res.insertId, ...pictureId });
   });
 };
@@ -97,7 +95,6 @@ User.dislikesPicture = (userId, pictureId, result) => {
       return;
     }
 
-    console.log("like picture: ", { id: res.insertId, ...pictureId });
     result(null, { id: res.insertId, ...pictureId });
   });
 };
@@ -129,7 +126,6 @@ User.addLikesComment = (userId, commentId, result) => {
       return;
     }
 
-    console.log("like comment: ", { id: res.insertId, ...commentId });
     result(null, { id: res.insertId, ...commentId });
   });
 };
@@ -143,7 +139,6 @@ User.dislikesComment = (userId, commentId, result) => {
       return;
     }
 
-    console.log("like comment: ", { id: res.insertId, ...commentId });
     result(null, { id: res.insertId, ...commentId });
   });
 };
@@ -162,7 +157,6 @@ User.delete = (id, result) => {
       return;
     }
 
-    console.log("deleted users with id: ", id);
     result(null, res);
   });
 };
