@@ -4,10 +4,12 @@ const pictureUtils = require("../config/picture.utils.js")
 // constructor
 const Picture = function(picture) {
   this.pictureId = picture.pictureId;
-  this.userId = picture.userId
   this.pictureUrl = picture.pictureUrl;
   this.countLike = picture.countLike;
   this.countComment = picture.countComment;
+  this.userId = picture.userId;
+  this.userName = picture.userName;
+  this.photoUrl = picture.photoUrl;
 };
 
 // Create and Save a new Picture
@@ -19,7 +21,8 @@ Picture.create = (newPicture, result) => {
       return;
     }
 
-    result(null, { id: res.insertId, ...newPicture });
+    newPicture.pictureId = res.insertId
+    result(null, newPicture);
   });
 };
 

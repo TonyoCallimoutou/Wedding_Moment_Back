@@ -8,6 +8,8 @@ const Comment = function(comment) {
   this.userId = comment.userId;
   this.comment = comment.comment;
   this.countLikeComment = comment.countLikeComment;
+  this.userName = comment.userName;
+  this.photoUrl = comment.photoUrl;
 };
 
 // Create and Save a new Comment
@@ -19,7 +21,8 @@ Comment.create = (newComment, result) => {
       return;
     }
 
-    result(null, { id: res.insertId, ...newComment });
+    newComment.commentId = res.insertId
+    result(null, newComment);
 
   });
 };

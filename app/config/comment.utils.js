@@ -4,7 +4,7 @@ class CommentUtils {
     }
 
     static sqlGetCommentById(id){
-        return `SELECT * FROM Comments WHERE commentId = ${id}`
+        return `SELECT * FROM Comments NATURAL JOIN users WHERE commentId = ${id}`
     }
 
     static sqlGetCommentsByPictureId(id){

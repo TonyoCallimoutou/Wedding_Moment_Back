@@ -15,7 +15,7 @@ exports.create = (req, res) => {
         commentId : req.body.commentId,
         pictureId : req.body.pictureId,
         comment : req.body.comment,
-        countLikecomment : req.body.countLikecomment,
+        countLikeComment : req.body.countLikeComment,
         userId : req.body.userId,
         userName: req.body.userName,
         photoUrl: req.body.photoUrl,

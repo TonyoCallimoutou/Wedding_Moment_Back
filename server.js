@@ -67,15 +67,30 @@ io.on('connection', (socket) => {
       console.log('user disconnected');
     });
 
-    socket.on('Pictures', () => {
-        io.emit('ListPictures')
-        console.log('refresh list of picture');
-      });
+    socket.on('addPicture', (picture) => {
+        io.emit('listeningAddPicture', picture)
+    });
 
-    socket.on('Comments', (pictureId) => {
-        io.emit('ListComments', pictureId)
-        console.log('refresh list of Comment');
-      });
+    socket.on('removePicture', (picture) => {
+        io.emit('ListeningRemovePicture', picture)
+    });
+
+    socket.on('setPicture', (picture) => {
+        io.emit('ListeningSetPicture', picture)
+    });
+
+    socket.on('addComment', (picture, comment) => {
+        io.emit('listeningAddComment', comment)
+        io.emit('ListeningSetPicture', picture)
+    });
+
+    socket.on('removeComment', (comment) => {
+        io.emit('ListeningRemoveComment', comment)
+    });
+    
+    socket.on('setComment', (comment) => {
+        io.emit('ListeningSetComment', comment)
+    });
 
 
 });
