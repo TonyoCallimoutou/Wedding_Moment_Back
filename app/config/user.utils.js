@@ -3,8 +3,12 @@ class UserUtils {
         return `INSERT INTO users (userid, email, userName, photoUrl, emailVerified) Values ('${data.userId}','${data.email}','${data.userName}','${data.photoUrl}',${data.emailVerified})`
     }
 
+    static sqlSetPhotoUrl(userId, photoUrl){
+        return `UPDATE users set photoUrl = '${photoUrl}' WHERE userId ='${userId}'`
+    }
+
     static sqlGetUserById(id) {
-        return `SELECT * FROM users WHERE userId = ${id}`
+        return `SELECT * FROM users WHERE userId = '${id}'`
     }
 
     static sqlGetAll() {
@@ -36,7 +40,7 @@ class UserUtils {
     }
 
     static sqlDelete(id) {
-        return `DELETE FROM users WHERE userId = ${id}`
+        return `DELETE FROM users WHERE userId = '${id}'`
     }
 }
 

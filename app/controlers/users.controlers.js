@@ -34,17 +34,30 @@ exports.create = (req, res) => {
       });
 };
 
+exports.setPhotoUrl = (req, res) => {
+
+  const userId = req.body.userId;
+  const photoUrl = req.body.photoUrl;
+
+  Users.setPhotoUrl(userId, photoUrl, (err, data) => {
+    if (err) 
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while setting User's picture"
+      });
+      else {
+        res.send(data)
+      }
+  });
+
+}
+
 // Retrieve user by id.
 exports.getUserById = (req, res) => {
     const id = req.params.id;
 
     Users.getUserById(id, (err, data) => {
-        if (err)
-            res.status(500).send({
-            message:
-                err.message || "Some error occurred while retrieving User."
-            });
-        else res.send(data);
+        res.send(data);
     });
 };
 

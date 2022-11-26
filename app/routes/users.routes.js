@@ -5,7 +5,10 @@ module.exports = app => {
   
     // Create a new Users
     router.post("/", users.create);
-  
+
+    // Set Users PhotUrl
+    router.post("/photoUrl", users.setPhotoUrl);
+
     // Retrieve all Users
     router.get("/", users.getAll);
 

@@ -21,7 +21,20 @@ User.create = (newUser, result) => {
       return;
     }
 
-    result(null, { id: res.insertId, ...newUser });
+    result(null, { userId: res.insertId, ...newUser });
+  });
+};
+
+// Set User Picture
+User.setPhotoUrl = (userId, photoUrl, result) => {
+  sql.query(userUtils.sqlSetPhotoUrl(userId, photoUrl), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    result(null, {userId});
   });
 };
 
