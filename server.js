@@ -84,8 +84,9 @@ io.on('connection', (socket) => {
         io.emit('ListeningSetPicture', picture)
     });
 
-    socket.on('removeComment', (comment) => {
+    socket.on('removeComment', (picture, comment) => {
         io.emit('ListeningRemoveComment', comment)
+        io.emit('ListeningSetPicture', picture)
     });
     
     socket.on('setComment', (comment) => {
