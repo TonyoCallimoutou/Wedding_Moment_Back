@@ -49,7 +49,7 @@ Picture.getAll = (result) => {
   sql.query(pictureUtils.sqlGetAll(), (err, res) => {
     if (err) {
       console.log("error: ", err);
-      result(null, err);
+      result(err, null);
       return;
     }
     result(null, res);
@@ -64,6 +64,7 @@ Picture.commentPicture = (id, result) => {
       result(null, err);
       return;
     }
+    
     result(null, res);
   });
 }
@@ -75,6 +76,7 @@ Picture.deleteCommentPicture = (id, result) => {
       result(null, err);
       return;
     }
+    
     result(null, res);
   });
 }

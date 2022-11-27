@@ -22,20 +22,22 @@ exports.create = (req, res) => {
       });
     
       // Save Comment in the database
-      Comments.create(comment, (err, data) => {
+      Comments.create(comment, (err, result) => {
         if (err)
           res.status(500).send({
             message:
               err.message || "Some error occurred while creating the Comment."
           });
         else {
-          res.send(data);
           Pictures.commentPicture(comment.pictureId, (err, data) => {
             if (err)
               res.status(500).send({
                 message:
                   err.message || "Some error occurred while add comment to picture."
               });
+            else {  
+              res.send(result)
+            }
           });
         };
       });
@@ -69,23 +71,6 @@ exports.getCommentsByPictureId = (req, res) => {
     });
 };
 
-// Delete Comment by id.
-exports.delete = (req, res) => {
-    Comments.delete(req.params.id, (err, data) => {
-        if (err) {
-          if (err.kind === "not_found") {
-            res.status(404).send({
-              message: `Not found Comment with id ${req.params.id}.`
-            });
-          } else {
-            res.status(500).send({
-              message: "Could not delete Comment with id " + req.params.id
-            });
-          }
-        } else res.send({ message: `Comment was deleted successfully!` });
-      });
-};
-
 // Get all Comments
 exports.getAll = (req, res) => {
 
@@ -96,15 +81,48 @@ exports.getAll = (req, res) => {
               err.message || "Some error occurred while retrieving comment."
           });
       else {
-        Pictures.deleteCommentPicture(comment.pictureId, (err, data) => {
-          if (err)
+        res.send(data)
+      }
+  });
+};
+
+
+// Delete Comment by id.
+exports.delete = (req, res) => {
+
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+  }
+
+  const commentId = req.body.commentId;
+  const pictureId = req.body.pictureId;
+
+
+  Comments.delete(commentId, (err, result) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found Comment with id ${req.params.id}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Could not delete Comment with id " + req.params.id
+          });
+        } 
+      } else {
+        Pictures.deleteCommentPicture(pictureId, (err, data) => {
+          if (err) {
             res.status(500).send({
               message:
                 err.message || "Some error occurred while add comment to picture."
             });
+          }
           else {
+            res.send(result);
           }
         });
       }
-  });
+    });
 };

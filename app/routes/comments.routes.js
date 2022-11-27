@@ -16,7 +16,7 @@ module.exports = app => {
     router.get("/", comments.getAll)
   
     // Delete a Comment with id
-    router.delete("/:id", comments.delete);
+    router.delete("/", comments.delete);
   
     app.use('/api/comments', router);
   };
