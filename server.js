@@ -92,6 +92,9 @@ io.on('connection', (socket) => {
     socket.on('setComment', (comment) => {
         io.emit('ListeningSetComment', comment)
     });
-
+    
+    socket.on('setUser', (user) => {
+        io.emit('ListeningSetUser', user)
+    });
 
 });

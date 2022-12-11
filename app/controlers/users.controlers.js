@@ -36,17 +36,14 @@ exports.create = (req, res) => {
 
 exports.setPhotoUrl = (req, res) => {
 
-  const userId = req.body.userId;
-  const photoUrl = req.body.photoUrl;
-
-  Users.setPhotoUrl(userId, photoUrl, (err, data) => {
+  Users.setPhotoUrl(req.body.userId, req.body.photoUrl, (err, data) => {
     if (err) 
       res.status(500).send({
         message:
           err.message || "Some error occurred while setting User's picture"
       });
       else {
-        res.send(data)
+        res.send(req.body)
       }
   });
 
@@ -80,10 +77,7 @@ exports.getLikesPictures = (req, res) => {
 
   Users.getLikesPictures(id, (err, data) => {
       if (err)
-          res.status(500).send({
-          message:
-              err.message || "Some error occurred while retrieving LikePicture."
-          });
+          res.send([])
       else res.send(data);
   });
 };
@@ -151,10 +145,7 @@ exports.getLikesComments = (req, res) => {
 
   Users.getLikesComments(id, (err, data) => {
       if (err)
-          res.status(500).send({
-          message:
-              err.message || "Some error occurred while retrieving LikePicture."
-          });
+        res.send([])
       else res.send(data);
   });
 };
