@@ -1,14 +1,14 @@
 class CommentUtils {
     static sqlCreateComment(data){
-        return `INSERT INTO comments (pictureId, userId, comment) Values (${data.pictureId},'${data.userId}',"${data.comment}")`
+        return `INSERT INTO comments (postId, userId, comment) Values (${data.postId},'${data.userId}',"${data.comment}")`
     }
 
     static sqlGetCommentById(id){
         return `SELECT * FROM Comments NATURAL JOIN users WHERE commentId = ${id}`
     }
 
-    static sqlGetCommentsByPictureId(id){
-        return `SELECT * FROM Comments NATURAL JOIN users WHERE pictureId = ${id}`
+    static sqlGetCommentsByPostId(id){
+        return `SELECT * FROM Comments NATURAL JOIN users WHERE postId = ${id}`
     }
     
     static sqlGetAll(){

@@ -15,6 +15,6 @@ app.use(cors({origin: '*'}));
 
 require("./app/routes/users.routes.js")(app);
 require("./app/routes/comments.routes.js")(app);
-require("./app/routes/pictures.routes.js")(app);
+require("./app/routes/posts.routes.js")(app);
 
 module.exports = app;

@@ -2,7 +2,7 @@ const http = require('http');
 const app = require('./app');
 const socketIo = require("socket.io");
 
-const pictures = require("./app/controlers/pictures.controlers.js");
+const posts = require("./app/controlers/posts.controlers.js");
 
 const normalizePort = val => {
     const port = parseInt(val, 10);
@@ -67,26 +67,26 @@ io.on('connection', (socket) => {
       console.log('user disconnected');
     });
 
-    socket.on('addPicture', (picture) => {
-        io.emit('listeningAddPicture', picture)
+    socket.on('addPost', (post) => {
+        io.emit('listeningAddPost', post)
     });
 
-    socket.on('removePicture', (picture) => {
-        io.emit('ListeningRemovePicture', picture)
+    socket.on('removePost', (post) => {
+        io.emit('ListeningRemovePost', post)
     });
 
-    socket.on('setPicture', (picture) => {
-        io.emit('ListeningSetPicture', picture)
+    socket.on('setPost', (post) => {
+        io.emit('ListeningSetPost', post)
     });
 
-    socket.on('addComment', (picture, comment) => {
+    socket.on('addComment', (post, comment) => {
         io.emit('listeningAddComment', comment)
-        io.emit('ListeningSetPicture', picture)
+        io.emit('ListeningSetPost', post)
     });
 
-    socket.on('removeComment', (picture, comment) => {
+    socket.on('removeComment', (post, comment) => {
         io.emit('ListeningRemoveComment', comment)
-        io.emit('ListeningSetPicture', picture)
+        io.emit('ListeningSetPost', post)
     });
     
     socket.on('setComment', (comment) => {

@@ -1,6 +1,6 @@
-const Pictures = require("../model/pictures.model.js");
+const Posts = require("../model/posts.model.js");
 
-// Create and Save a new Picture
+// Create and Save a new Post
 exports.create = (req, res) => {
     
     if (!req.body) {
@@ -9,8 +9,9 @@ exports.create = (req, res) => {
         });
       }
     
-      const picture = new Pictures({
-        pictureId: req.body.pictureId,
+      const post = new Posts({
+        postId: req.body.postId,
+        categorieId: req.body.categorieId,
         pictureUrl: req.body.pictureUrl,
         countLike: req.body.countLike,
         countComment: req.body.countComment,
@@ -20,58 +21,58 @@ exports.create = (req, res) => {
 
       });
     
-      // Save Picture in the database
-      Pictures.create(picture, (err, data) => {
+      // Save Post in the database
+      Posts.create(post, (err, data) => {
         if (err)
           res.status(500).send({
             message:
-              err.message || "Some error occurred while creating the Picture."
+              err.message || "Some error occurred while creating the Post."
           });
         else res.send(data);
       });
 };
 
-// Retrieve picture by id.
-exports.getPictureById = (req, res) => {
+// Retrieve post by id.
+exports.getPostById = (req, res) => {
     const id = req.params.id;
 
-    Pictures.getPictureById(id, (err, data) => {
+    Posts.getPostById(id, (err, data) => {
         if (err)
             res.status(500).send({
             message:
-                err.message || "Some error occurred while retrieving Picture."
+                err.message || "Some error occurred while retrieving Post."
             });
         else res.send(data);
     });
 };
 
-// Retrieve all Picture
+// Retrieve all Post
 exports.getAll = (req, res) => {
 
-    Pictures.getAll((err, data) => {
+    Posts.getAll((err, data) => {
         if (err)
             res.status(500).send({
             message:
-                err.message || "Some error occurred while retrieving Picture."
+                err.message || "Some error occurred while retrieving Post."
             });
         else res.send(data);
     });
 };
 
 
-// Delete Picture by Id
+// Delete Post by Id
 exports.delete = (req, res) => {
-    Pictures.delete(req.params.id, (err, data) => {
+    Posts.delete(req.params.id, (err, data) => {
         if (err) {
           if (err.kind === "not_found") {
             res.status(404).send({
-              message: `Not found Picture with id ${req.params.id}.`
+              message: `Not found Post with id ${req.params.id}.`
             });
           } else {
             res.status(500).send({
-              message: "Could not delete Picture with id " + req.params.id
+              message: "Could not delete Post with id " + req.params.id
             });
           }
-        } else res.send({ message: `Picture was deleted successfully!` });
+        } else res.send({ message: `Post was deleted successfully!` });
       });
 };

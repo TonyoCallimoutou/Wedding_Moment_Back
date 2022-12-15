@@ -4,7 +4,7 @@ const commentUtils = require("../config/comment.utils.js")
 // constructor
 const Comment = function(comment) {
   this.commentId = comment.commentId;
-  this.pictureId = comment.pictureId;
+  this.postId = comment.postId;
   this.userId = comment.userId;
   this.comment = comment.comment;
   this.countLikeComment = comment.countLikeComment;
@@ -46,9 +46,9 @@ Comment.getCommentById = (id, result) => {
   });
 };
 
-// Retrieve Comment by pictureId.
-Comment.getCommentsByPictureId = (id, result) => {
-  sql.query(commentUtils.sqlGetCommentsByPictureId(id), (err, res) => {
+// Retrieve Comment by postId.
+Comment.getCommentsByPostId = (id, result) => {
+  sql.query(commentUtils.sqlGetCommentsByPostId(id), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

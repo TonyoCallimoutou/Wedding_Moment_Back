@@ -1,5 +1,5 @@
 const Users = require("../model/users.model.js");
-const Pictures = require("../model/pictures.model.js");
+const Posts = require("../model/posts.model.js");
 const Comments = require("../model/comments.model.js");
 
 
@@ -14,6 +14,7 @@ exports.create = (req, res) => {
     
       const user = new Users({
         userId: req.body.userId,
+        roleId: req.body.roleId,
         email: req.body.email,
         userName: req.body.userName,
         photoUrl: req.body.photoUrl,
@@ -40,7 +41,7 @@ exports.setPhotoUrl = (req, res) => {
     if (err) 
       res.status(500).send({
         message:
-          err.message || "Some error occurred while setting User's picture"
+          err.message || "Some error occurred while setting User's post"
       });
       else {
         res.send(req.body)
@@ -71,19 +72,19 @@ exports.getAll = (req, res) => {
     });
 };
 
-// Retrieve listOfLikePicture
-exports.getLikesPictures = (req, res) => {
+// Retrieve listOfLikePost
+exports.getLikesPosts = (req, res) => {
   const id = req.params.id;
 
-  Users.getLikesPictures(id, (err, data) => {
+  Users.getLikesPosts(id, (err, data) => {
       if (err)
           res.send([])
       else res.send(data);
   });
 };
 
-// Add pictures in listOfLikePicture
-exports.addLikesPicture = (req, res) => {
+// Add posts in listOfLikePost
+exports.addLikesPost = (req, res) => {
     
   if (!req.body) {
       res.status(400).send({
@@ -91,14 +92,14 @@ exports.addLikesPicture = (req, res) => {
       });
     }
 
-    Users.addLikesPicture(req.body.userId, req.body.pictureId, (err, data) => {
+    Users.addLikesPost(req.body.userId, req.body.postId, (err, data) => {
       if (err)
         res.status(500).send({
           message:
             err.message || "Some error occurred while creating the User."
         });
       else {
-        Pictures.likePicture(req.body.pictureId,(err, data) => {
+        Posts.likePost(req.body.postId,(err, data) => {
           if (err)
             res.status(500).send({
               message:
@@ -111,8 +112,8 @@ exports.addLikesPicture = (req, res) => {
     });
 };
 
-// Delete pictures in listOfLikePicture
-exports.dislikesPicture = (req, res) => {
+// Delete posts in listOfLikePost
+exports.dislikesPost = (req, res) => {
 
   if (!req.body) {
     res.status(400).send({
@@ -120,7 +121,7 @@ exports.dislikesPicture = (req, res) => {
     });
   }
 
-  Users.dislikesPicture(req.body.userId, req.body.pictureId, (err, data) => {
+  Users.dislikesPost(req.body.userId, req.body.postId, (err, data) => {
     if (err)
       res.status(500).send({
         message:
@@ -128,7 +129,7 @@ exports.dislikesPicture = (req, res) => {
       });
     else {
       res.send(data);
-      Pictures.dislikePicture(req.body.pictureId,(err, data) => {
+      Posts.dislikePost(req.body.postId,(err, data) => {
         if (err)
           res.status(500).send({
             message:

@@ -1,5 +1,5 @@
 const Comments = require("../model/comments.model.js");
-const Pictures = require("../model/pictures.model.js");
+const Posts = require("../model/posts.model.js");
 
 
 // Create and Save a new Comment
@@ -13,7 +13,7 @@ exports.create = (req, res) => {
     
       const comment = new Comments({
         commentId : req.body.commentId,
-        pictureId : req.body.pictureId,
+        postId : req.body.postId,
         comment : req.body.comment,
         countLikeComment : req.body.countLikeComment,
         userId : req.body.userId,
@@ -29,11 +29,11 @@ exports.create = (req, res) => {
               err.message || "Some error occurred while creating the Comment."
           });
         else {
-          Pictures.commentPicture(comment.pictureId, (err, data) => {
+          Posts.commentPost(comment.postId, (err, data) => {
             if (err)
               res.status(500).send({
                 message:
-                  err.message || "Some error occurred while add comment to picture."
+                  err.message || "Some error occurred while add comment to post."
               });
             else {  
               res.send(result)
@@ -57,11 +57,11 @@ exports.getCommentsById = (req, res) => {
     });
 };
 
-// Retrieve Comment by pictureId.
-exports.getCommentsByPictureId = (req, res) => {
+// Retrieve Comment by postId.
+exports.getCommentsByPostId = (req, res) => {
     const id = req.params.id;
 
-    Comments.getCommentsByPictureId(id, (err, data) => {
+    Comments.getCommentsByPostId(id, (err, data) => {
         if (err)
             res.status(500).send({
             message:
@@ -97,7 +97,7 @@ exports.delete = (req, res) => {
   }
 
   const commentId = req.body.commentId;
-  const pictureId = req.body.pictureId;
+  const postId = req.body.postId;
 
 
   Comments.delete(commentId, (err, result) => {
@@ -112,11 +112,11 @@ exports.delete = (req, res) => {
           });
         } 
       } else {
-        Pictures.deleteCommentPicture(pictureId, (err, data) => {
+        Posts.deleteCommentPost(postId, (err, data) => {
           if (err) {
             res.status(500).send({
               message:
-                err.message || "Some error occurred while add comment to picture."
+                err.message || "Some error occurred while add comment to post."
             });
           }
           else {

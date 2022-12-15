@@ -1,6 +1,6 @@
 class UserUtils {
     static sqlCreateUser(data){
-        return `INSERT INTO users (userid, email, userName, photoUrl, emailVerified) Values ('${data.userId}','${data.email}','${data.userName}','${data.photoUrl}',${data.emailVerified})`
+        return `INSERT INTO users (userid, roleId,email, userName, photoUrl, emailVerified) Values ('${data.userId}','${data.roleId}','${data.email}','${data.userName}','${data.photoUrl}',${data.emailVerified})`
     }
 
     static sqlSetPhotoUrl(userId, photoUrl){
@@ -15,16 +15,16 @@ class UserUtils {
         return `SELECT * FROM Users`
     }
 
-    static sqlGetLikesPictures(id) {
-        return `SELECT pictureId FROM UsersLikesPictures WHERE userId = "${id}"`
+    static sqlGetLikesPosts(id) {
+        return `SELECT postId FROM UsersLikesPosts WHERE userId = "${id}"`
     }
 
-    static sqlAddLikesPicture(userId, pictureId) {
-        return `INSERT INTO UsersLikesPictures (userId, pictureId) Values ('${userId}','${pictureId}')`
+    static sqlAddLikesPost(userId, postId) {
+        return `INSERT INTO UsersLikesPosts (userId, postId) Values ('${userId}','${postId}')`
     }
 
-    static sqlDislikesPicture(userId, pictureId) {
-        return `DELETE FROM UsersLikesPictures WHERE userId = '${userId}' AND pictureId = '${pictureId}'`
+    static sqlDislikesPost(userId, postId) {
+        return `DELETE FROM UsersLikesPosts WHERE userId = '${userId}' AND postId = '${postId}'`
     }
 
     static sqlGetLikesComments(id) {

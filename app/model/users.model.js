@@ -5,6 +5,7 @@ const userUtils = require("../config/user.utils.js");
 // constructor
 const User = function(user) {
   this.userId = user.userId;
+  this.roleId = user.roleId;
   this.email = user.email;
   this.userName = user.userName;
   this.photoUrl = user.photoUrl;
@@ -25,7 +26,7 @@ User.create = (newUser, result) => {
   });
 };
 
-// Set User Picture
+// Set User Post
 User.setPhotoUrl = (userId, photoUrl, result) => {
   sql.query(userUtils.sqlSetPhotoUrl(userId, photoUrl), (err, res) => {
     if (err) {
@@ -68,9 +69,9 @@ User.getAll = (result) => {
   });
 };
 
-// Retrieve listOfLikePicture
-User.getLikesPictures = (id, result) => {
-  sql.query(userUtils.sqlGetLikesPictures(id), (err, res) => {
+// Retrieve listOfLikePost
+User.getLikesPosts = (id, result) => {
+  sql.query(userUtils.sqlGetLikesPosts(id), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -86,29 +87,29 @@ User.getLikesPictures = (id, result) => {
   });
 };
 
-// Add pictures in listOfLikePicture
-User.addLikesPicture = (userId, pictureId, result) => {
-  sql.query(userUtils.sqlAddLikesPicture(userId, pictureId), (err, res) => {
+// Add posts in listOfLikePost
+User.addLikesPost = (userId, postId, result) => {
+  sql.query(userUtils.sqlAddLikesPost(userId, postId), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
 
-    result(null, { id: res.insertId, ...pictureId });
+    result(null, { id: res.insertId, ...postId });
   });
 };
 
-// Delete pictures in listOfLikePicture
-User.dislikesPicture = (userId, pictureId, result) => {
-  sql.query(userUtils.sqlDislikesPicture(userId, pictureId), (err, res) => {
+// Delete posts in listOfLikePost
+User.dislikesPost = (userId, postId, result) => {
+  sql.query(userUtils.sqlDislikesPost(userId, postId), (err, res) => {
     if (err) {
       console.log("erreur: ", err);
       result(err, null);
       return;
     }
 
-    result(null, { id: res.insertId, ...pictureId });
+    result(null, { id: res.insertId, ...postId });
   });
 };
 
