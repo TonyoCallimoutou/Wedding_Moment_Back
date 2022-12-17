@@ -7,10 +7,13 @@ module.exports = app => {
     router.post("/", posts.create);
   
     // Retrieve all Posts
-    router.get("/", posts.getAll);
+    router.get("/event/:id", posts.getAll);
 
     // Retrieve Posts by id
     router.get("/:id", posts.getPostById);
+
+    // Change Picture of Post
+    router.post("/setter", posts.setPictureOfPost)
   
     // Delete a Posts with id
     router.delete("/:id", posts.delete);

@@ -4,6 +4,7 @@ const postUtils = require("../config/post.utils.js")
 // constructor
 const Post = function(post) {
   this.postId = post.postId;
+  this.eventId = post.eventId;
   this.categorieId = post.categorieId;
   this.pictureUrl = post.pictureUrl;
   this.countLike = post.countLike;
@@ -46,8 +47,8 @@ Post.getPostById = (id, result) => {
 };
 
 // Retrieve all Post
-Post.getAll = (result) => {
-  sql.query(postUtils.sqlGetAll(), (err, res) => {
+Post.getAll = (eventId, result) => {
+  sql.query(postUtils.sqlGetAll(eventId), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -97,6 +98,17 @@ Post.likePost = (id, result) => {
 // Dislike Post
 Post.dislikePost = (id, result) => {
   sql.query(postUtils.sqlDislikePost(id), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    result(null, res);
+  });
+}
+
+Post.setPicture = (data, result) => {
+  sql.query(postUtils.sqlSetPicture(data), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

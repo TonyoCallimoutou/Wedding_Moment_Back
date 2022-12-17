@@ -1,14 +1,14 @@
 class PostUtils {
     static sqlCreatePost(data){
-        return `INSERT INTO posts (userId, categorieId, pictureUrl) Values ('${data.userId}','${data.categorieId}','${data.pictureUrl}')`
+        return `INSERT INTO posts (userId, eventId, categorieId, pictureUrl) Values ('${data.userId}',${data.eventId},${data.categorieId},"${data.pictureUrl}")`
     }
 
     static sqlGetPostById(id){
         return `SELECT * FROM posts NATURAL JOIN users WHERE postId = ${id}`
     }
 
-    static sqlGetAll(){
-        return `SELECT * FROM posts NATURAL JOIN users`
+    static sqlGetAll(eventId){
+        return `SELECT * FROM posts NATURAL JOIN users WHERE eventId = ${eventId}`
     }
 
     static sqlCommentPost(postId) {
@@ -25,6 +25,10 @@ class PostUtils {
 
     static sqlDislikePost(postId) {
         return `UPDATE posts SET countLike = countLike - 1 WHERE postId =  ${postId}`
+    }
+
+    static sqlSetPicture(data) {
+        return `UPDATE posts SET pictureUrl = "${data.pictureUrl}" WHERE postId =  ${data.postId}`
     }
 
     static sqlDelete(id) {

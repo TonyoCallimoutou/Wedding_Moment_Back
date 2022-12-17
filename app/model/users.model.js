@@ -1,11 +1,9 @@
-const { UserUtils } = require("../config/user.utils.js");
 const sql = require("./db.js");
 const userUtils = require("../config/user.utils.js");
 
 // constructor
 const User = function(user) {
   this.userId = user.userId;
-  this.roleId = user.roleId;
   this.email = user.email;
   this.userName = user.userName;
   this.photoUrl = user.photoUrl;

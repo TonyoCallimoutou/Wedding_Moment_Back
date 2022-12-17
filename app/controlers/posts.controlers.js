@@ -11,6 +11,7 @@ exports.create = (req, res) => {
     
       const post = new Posts({
         postId: req.body.postId,
+        eventId: req.body.eventId,
         categorieId: req.body.categorieId,
         pictureUrl: req.body.pictureUrl,
         countLike: req.body.countLike,
@@ -48,8 +49,9 @@ exports.getPostById = (req, res) => {
 
 // Retrieve all Post
 exports.getAll = (req, res) => {
+  const eventId = req.params.id;
 
-    Posts.getAll((err, data) => {
+    Posts.getAll(eventId, (err, data) => {
         if (err)
             res.status(500).send({
             message:
@@ -58,6 +60,17 @@ exports.getAll = (req, res) => {
         else res.send(data);
     });
 };
+
+exports.setPictureOfPost = (req, res) => {
+  Posts.setPicture(req.body,(err, data) => {
+    if (err)
+        res.status(500).send({
+        message:
+            err.message || "Some error occurred while retrieving Post."
+        });
+    else res.send(data);
+  });
+}
 
 
 // Delete Post by Id

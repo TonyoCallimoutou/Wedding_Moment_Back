@@ -14,7 +14,6 @@ exports.create = (req, res) => {
     
       const user = new Users({
         userId: req.body.userId,
-        roleId: req.body.roleId,
         email: req.body.email,
         userName: req.body.userName,
         photoUrl: req.body.photoUrl,
