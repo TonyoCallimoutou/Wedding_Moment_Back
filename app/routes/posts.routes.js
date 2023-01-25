@@ -1,22 +1,19 @@
 module.exports = app => {
     const posts = require("../controlers/posts.controlers.js");
-  
-    var router = require("express").Router();
+
+    const router = require("express").Router();
   
     // Create a new Posts
-    router.post("/", posts.create);
+    router.post("/", posts.createPost);
   
     // Retrieve all Posts
-    router.get("/event/:id", posts.getAll);
-
-    // Retrieve Posts by id
-    router.get("/:id", posts.getPostById);
+    router.get("/event/:id", posts.getAllPost);
 
     // Change Picture of Post
     router.post("/setter", posts.setPictureOfPost)
   
     // Delete a Posts with id
-    router.delete("/:id", posts.delete);
+    router.delete("/:id", posts.deletePost);
   
     app.use('/api/posts', router);
   };

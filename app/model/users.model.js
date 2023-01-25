@@ -12,7 +12,7 @@ const User = function(user) {
 
 
 // Create and Save a new User
-User.create = (newUser, result) => {
+User.createUser = (newUser, result) => {
   sql.query(userUtils.sqlCreateUser(newUser), (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -55,21 +55,9 @@ User.getUserById = (id, result) => {
   });
 };
 
-// Retrieve all Users.
-User.getAll = (result) => {
-  sql.query(userUtils.sqlGetAll(), (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
-    }
-    result(null, res);
-  });
-};
-
 // Retrieve listOfLikePost
-User.getLikesPosts = (id, result) => {
-  sql.query(userUtils.sqlGetLikesPosts(id), (err, res) => {
+User.getReactPosts = (id, result) => {
+  sql.query(userUtils.sqlGetReactPosts(id), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -86,8 +74,8 @@ User.getLikesPosts = (id, result) => {
 };
 
 // Add posts in listOfLikePost
-User.addLikesPost = (userId, postId, result) => {
-  sql.query(userUtils.sqlAddLikesPost(userId, postId), (err, res) => {
+User.addReactPost = (data, result) => {
+  sql.query(userUtils.sqlAddReactPost(data), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -99,8 +87,8 @@ User.addLikesPost = (userId, postId, result) => {
 };
 
 // Delete posts in listOfLikePost
-User.dislikesPost = (userId, postId, result) => {
-  sql.query(userUtils.sqlDislikesPost(userId, postId), (err, res) => {
+User.unReactPost = (userId, postId, result) => {
+  sql.query(userUtils.sqlUnReactPost(userId, postId), (err, res) => {
     if (err) {
       console.log("erreur: ", err);
       result(err, null);
@@ -111,9 +99,9 @@ User.dislikesPost = (userId, postId, result) => {
   });
 };
 
-// Retrieve listOfLikeComment
-User.getLikesComments = (id, result) => {
-  sql.query(userUtils.sqlGetLikesComments(id), (err, res) => {
+// Retrieve Notification
+User.getNotification = (id, result) => {
+  sql.query(userUtils.sqlGetNotification(id), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -129,35 +117,10 @@ User.getLikesComments = (id, result) => {
   });
 };
 
-// Add Comments in listOfLikeComments
-User.addLikesComment = (userId, commentId, result) => {
-  sql.query(userUtils.sqlAddLikesComment(userId, commentId), (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
-
-    result(null, { id: res.insertId, ...commentId });
-  });
-};
-
-// Delete comment in listOfLikeComment
-User.dislikesComment = (userId, commentId, result) => {
-  sql.query(userUtils.sqlDislikesComment(userId, commentId), (err, res) => {
-    if (err) {
-      console.log("erreur: ", err);
-      result(err, null);
-      return;
-    }
-
-    result(null, { id: res.insertId, ...commentId });
-  });
-};
 
 // Delete User by Id
-User.delete = (id, result) => {
-  sql.query(userUtils.sqlDelete(id), (err, res) => {
+User.deleteUser = (id, result) => {
+  sql.query(userUtils.sqlDeleteUser(id), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);

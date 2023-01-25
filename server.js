@@ -79,20 +79,22 @@ io.on('connection', (socket) => {
         io.emit('ListeningSetPost', post)
     });
 
-    socket.on('addComment', (post, comment) => {
-        io.emit('listeningAddComment', comment)
-        io.emit('ListeningSetPost', post)
+    socket.on('setEvent', (event) => {
+        io.emit('ListeningSetEvent', event)
     });
 
-    socket.on('removeComment', (post, comment) => {
-        io.emit('ListeningRemoveComment', comment)
-        io.emit('ListeningSetPost', post)
+    socket.on('setInvite', (invite) => {
+        io.emit('ListeningSetInvite', invite)
     });
-    
-    socket.on('setComment', (comment) => {
-        io.emit('ListeningSetComment', comment)
+
+    socket.on('setPlanTable', (planTable) => {
+        io.emit('ListeningSetPlanTable', planTable)
     });
-    
+
+    socket.on('setMenu', (menu) => {
+        io.emit('ListeningSetMenu', menu)
+    });
+
     socket.on('setUser', (user) => {
         io.emit('ListeningSetUser', user)
     });

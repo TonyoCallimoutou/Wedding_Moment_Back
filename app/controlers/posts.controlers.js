@@ -1,7 +1,7 @@
 const Posts = require("../model/posts.model.js");
 
 // Create and Save a new Post
-exports.create = (req, res) => {
+exports.createPost = (req, res) => {
     
     if (!req.body) {
         res.status(400).send({
@@ -10,20 +10,18 @@ exports.create = (req, res) => {
       }
     
       const post = new Posts({
-        postId: req.body.postId,
-        eventId: req.body.eventId,
-        categorieId: req.body.categorieId,
-        pictureUrl: req.body.pictureUrl,
-        countLike: req.body.countLike,
-        countComment: req.body.countComment,
-        userId: req.body.userId,
-        userName: req.body.userName,
-        photoUrl: req.body.photoUrl,
+          postId: req.body.postId,
+          eventId: req.body.eventId,
+          pictureUrl: req.body.pictureUrl,
+          countReact: req.body.countReact,
+          userId: req.body.userId,
+          userName: req.body.userName,
+          photoUrl: req.body.photoUrl,
 
       });
     
       // Save Post in the database
-      Posts.create(post, (err, data) => {
+      Posts.createPost(post, (err, data) => {
         if (err)
           res.status(500).send({
             message:
@@ -33,25 +31,11 @@ exports.create = (req, res) => {
       });
 };
 
-// Retrieve post by id.
-exports.getPostById = (req, res) => {
-    const id = req.params.id;
-
-    Posts.getPostById(id, (err, data) => {
-        if (err)
-            res.status(500).send({
-            message:
-                err.message || "Some error occurred while retrieving Post."
-            });
-        else res.send(data);
-    });
-};
-
 // Retrieve all Post
-exports.getAll = (req, res) => {
+exports.getAllPost = (req, res) => {
   const eventId = req.params.id;
 
-    Posts.getAll(eventId, (err, data) => {
+    Posts.getAllPost(eventId, (err, data) => {
         if (err)
             res.status(500).send({
             message:
@@ -74,8 +58,8 @@ exports.setPictureOfPost = (req, res) => {
 
 
 // Delete Post by Id
-exports.delete = (req, res) => {
-    Posts.delete(req.params.id, (err, data) => {
+exports.deletePost = (req, res) => {
+    Posts.deletePost(req.params.id, (err, data) => {
         if (err) {
           if (err.kind === "not_found") {
             res.status(404).send({

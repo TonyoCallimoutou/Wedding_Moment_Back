@@ -1,10 +1,10 @@
 const Users = require("../model/users.model.js");
 const Posts = require("../model/posts.model.js");
-const Comments = require("../model/comments.model.js");
+const Comments = require("../model/events.model.js");
 
 
 // Create and Save a new User
-exports.create = (req, res) => {
+exports.createUser = (req, res) => {
     
     if (!req.body) {
         res.status(400).send({
@@ -21,7 +21,7 @@ exports.create = (req, res) => {
       });
     
       // Save User in the database
-      Users.create(user, (err, data) => {
+      Users.createUser(user, (err, data) => {
         if (err)
           res.status(500).send({
             message:
@@ -58,24 +58,11 @@ exports.getUserById = (req, res) => {
     });
 };
 
-// Retrieve all Users.
-exports.getAll = (req, res) => {
-
-    Users.getAll((err, data) => {
-        if (err)
-            res.status(500).send({
-            message:
-                err.message || "Some error occurred while retrieving User."
-            });
-        else res.send(data);
-    });
-};
-
 // Retrieve listOfLikePost
-exports.getLikesPosts = (req, res) => {
+exports.getReactPosts = (req, res) => {
   const id = req.params.id;
 
-  Users.getLikesPosts(id, (err, data) => {
+  Users.getReactPosts(id, (err, data) => {
       if (err)
           res.send([])
       else res.send(data);
@@ -83,7 +70,7 @@ exports.getLikesPosts = (req, res) => {
 };
 
 // Add posts in listOfLikePost
-exports.addLikesPost = (req, res) => {
+exports.addReactPost = (req, res) => {
     
   if (!req.body) {
       res.status(400).send({
@@ -91,14 +78,14 @@ exports.addLikesPost = (req, res) => {
       });
     }
 
-    Users.addLikesPost(req.body.userId, req.body.postId, (err, data) => {
+    Users.addReactPost(req.body.userId, req.body.postId, (err, data) => {
       if (err)
         res.status(500).send({
           message:
             err.message || "Some error occurred while creating the User."
         });
       else {
-        Posts.likePost(req.body.postId,(err, data) => {
+        Posts.reactPost(req.body.postId,(err, data) => {
           if (err)
             res.status(500).send({
               message:
@@ -112,7 +99,7 @@ exports.addLikesPost = (req, res) => {
 };
 
 // Delete posts in listOfLikePost
-exports.dislikesPost = (req, res) => {
+exports.unReactPost = (req, res) => {
 
   if (!req.body) {
     res.status(400).send({
@@ -120,7 +107,7 @@ exports.dislikesPost = (req, res) => {
     });
   }
 
-  Users.dislikesPost(req.body.userId, req.body.postId, (err, data) => {
+  Users.unReactPost(req.body.userId, req.body.postId, (err, data) => {
     if (err)
       res.status(500).send({
         message:
@@ -128,7 +115,7 @@ exports.dislikesPost = (req, res) => {
       });
     else {
       res.send(data);
-      Posts.dislikePost(req.body.postId,(err, data) => {
+      Posts.unReactPost(req.body.postId,(err, data) => {
         if (err)
           res.status(500).send({
             message:
@@ -139,77 +126,20 @@ exports.dislikesPost = (req, res) => {
   });
 };
 
-// Retrieve listOfLikeComment
-exports.getLikesComments = (req, res) => {
+// Retrieve listOfLikePost
+exports.getNotification = (req, res) => {
   const id = req.params.id;
 
-  Users.getLikesComments(id, (err, data) => {
-      if (err)
-        res.send([])
-      else res.send(data);
-  });
-};
-
-// Add Comments in listOfLikeComments
-exports.addLikesComment = (req, res) => {
-    
-  if (!req.body) {
-      res.status(400).send({
-        message: "Content can not be empty!"
-      });
-    }
-
-    Users.addLikesComment(req.body.userId, req.body.commentId, (err, data) => {
-      if (err)
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the User."
-        });
-      else {
-        res.send(data);
-        Comments.likeComment(req.body.commentId,(err, data) => {
-          if (err)
-            res.status(500).send({
-              message:
-                err.message || "Some error occurred while creating the User."
-            });
-          });
-      }
-    });
-};
-
-// Delete comment in listOfLikeComment
-exports.dislikesComment = (req, res) => {
-
-  if (!req.body) {
-    res.status(400).send({
-      message: "Content can not be empty!"
-    });
-  }
-
-  Users.dislikesComment(req.body.userId, req.body.commentId, (err, data) => {
+  Users.getNotification(id, (err, data) => {
     if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the User."
-      });
-    else {
-      res.send(data);
-      Comments.dislikeComment(req.body.commentId,(err, data) => {
-        if (err)
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while creating the User."
-          });
-        });
-    }
+      res.send([])
+    else res.send(data);
   });
 };
-
 
 // Delete User by Id
-exports.delete = (req, res) => {
-    Users.delete(req.params.id, (err, data) => {
+exports.deleteUser = (req, res) => {
+    Users.deleteUser(req.params.id, (err, data) => {
         if (err) {
           if (err.kind === "not_found") {
             res.status(404).send({

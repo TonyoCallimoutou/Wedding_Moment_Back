@@ -5,17 +5,15 @@ const postUtils = require("../config/post.utils.js")
 const Post = function(post) {
   this.postId = post.postId;
   this.eventId = post.eventId;
-  this.categorieId = post.categorieId;
   this.pictureUrl = post.pictureUrl;
-  this.countLike = post.countLike;
-  this.countComment = post.countComment;
+  this.countReact = post.countReact;
   this.userId = post.userId;
   this.userName = post.userName;
   this.photoUrl = post.photoUrl;
 };
 
 // Create and Save a new Post
-Post.create = (newPost, result) => {
+Post.createPost = (newPost, result) => {
   sql.query(postUtils.sqlCreatePost(newPost), (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -28,27 +26,9 @@ Post.create = (newPost, result) => {
   });
 };
 
-// Retrieve post by id.
-Post.getPostById = (id, result) => {
-  sql.query(postUtils.sqlGetPostById(id), (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
-
-    if (res.length) {
-      result(null, res[0]);
-      return;
-    }
-
-    result({ kind: "not_found" }, null);
-  });
-};
-
 // Retrieve all Post
-Post.getAll = (eventId, result) => {
-  sql.query(postUtils.sqlGetAll(eventId), (err, res) => {
+Post.getAllPost = (eventId, result) => {
+  sql.query(postUtils.sqlGetAllPost(eventId), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -58,34 +38,10 @@ Post.getAll = (eventId, result) => {
   });
 };
 
-// Add Comment to post
-Post.commentPost = (id, result) => {
-  sql.query(postUtils.sqlCommentPost(id), (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
-    }
-    
-    result(null, res);
-  });
-}
-
-Post.deleteCommentPost = (id, result) => {
-  sql.query(postUtils.sqlDeleteCommentPost(id), (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
-    }
-    
-    result(null, res);
-  });
-}
 
 // Like Post
-Post.likePost = (id, result) => {
-  sql.query(postUtils.sqlLikePost(id), (err, res) => {
+Post.reactPost = (id, result) => {
+  sql.query(postUtils.sqlReactPost(id), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -96,8 +52,8 @@ Post.likePost = (id, result) => {
 }
 
 // Dislike Post
-Post.dislikePost = (id, result) => {
-  sql.query(postUtils.sqlDislikePost(id), (err, res) => {
+Post.unReactPost = (id, result) => {
+  sql.query(postUtils.sqlUnReactPost(id), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -119,8 +75,8 @@ Post.setPicture = (data, result) => {
 }
 
 // Delete Post by Id
-Post.delete = (id, result) => {
-  sql.query(postUtils.sqlDelete(id), (err, res) => {
+Post.deletePost = (id, result) => {
+  sql.query(postUtils.sqlDeletePost(id), (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
