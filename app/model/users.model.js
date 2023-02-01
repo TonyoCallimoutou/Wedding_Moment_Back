@@ -55,7 +55,7 @@ User.getUserById = (id, result) => {
   });
 };
 
-// Retrieve listOfLikePost
+// Retrieve listOfReactPost
 User.getReactPosts = (id, result) => {
   sql.query(userUtils.sqlGetReactPosts(id), (err, res) => {
     if (err) {
@@ -73,7 +73,7 @@ User.getReactPosts = (id, result) => {
   });
 };
 
-// Add posts in listOfLikePost
+// Add posts in listOfReactPost
 User.addReactPost = (data, result) => {
   sql.query(userUtils.sqlAddReactPost(data), (err, res) => {
     if (err) {
@@ -82,11 +82,11 @@ User.addReactPost = (data, result) => {
       return;
     }
 
-    result(null, { id: res.insertId, ...postId });
+    result(null, { id: res.insertId, ...data.postId });
   });
 };
 
-// Delete posts in listOfLikePost
+// Delete posts in listOfReactPost
 User.unReactPost = (userId, postId, result) => {
   sql.query(userUtils.sqlUnReactPost(userId, postId), (err, res) => {
     if (err) {

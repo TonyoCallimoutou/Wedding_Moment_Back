@@ -17,7 +17,7 @@ class UserUtils {
     }
 
     static sqlAddReactPost(data) {
-        return `INSERT INTO UsersReactPosts (userId, postId) Values ('${data.userId}','${data.postId}', '${data.reaction}')`
+        return `INSERT INTO UsersReactPosts (userId, postId, reaction) Values ('${data.userId}',${data.postId}, "${data.reaction}")`
     }
 
     static sqlUnReactPost(userId, postId) {

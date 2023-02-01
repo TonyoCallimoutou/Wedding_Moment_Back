@@ -78,7 +78,7 @@ exports.addReactPost = (req, res) => {
       });
     }
 
-    Users.addReactPost(req.body.userId, req.body.postId, (err, data) => {
+    Users.addReactPost(req.body, (err, data) => {
       if (err)
         res.status(500).send({
           message:
