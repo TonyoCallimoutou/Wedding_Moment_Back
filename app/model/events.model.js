@@ -60,6 +60,49 @@ Event.deleteEvent = (id, result) => {
   });
 };
 
+Event.createMenu = (data, result) => {
+  sql.query(eventUtils.sqlCreateMenu(data), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    data.menuId = res.insertId
+    result(null, data);
+
+  });
+};
+
+Event.getMenu = (id, result) => {
+  sql.query(eventUtils.sqlGetMenu(id), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    result(null, res);
+  })
+}
+
+Event.deleteMenu = (id, result) => {
+  sql.query(eventUtils.sqlDeleteMenu(id), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    if (res.affectedRows == 0) {
+      // not found Tutorial with the id
+      result({ kind: "not_found" }, null);
+      return;
+    }
+
+    result(null, res);
+  });
+};
+
 Event.createPlanTable = (data, result) => {
   sql.query(eventUtils.sqlCreatePlanTable(data), (err, res) => {
     if (err) {
@@ -73,6 +116,17 @@ Event.createPlanTable = (data, result) => {
 
   });
 };
+
+Event.getPlanTable = (id, result) => {
+  sql.query(eventUtils.sqlGetPlanTable(id), (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    result(null, res);
+  })
+}
 
 Event.deletePlanTable = (id, result) => {
   sql.query(eventUtils.sqlDeletePlanTable(id), (err, res) => {

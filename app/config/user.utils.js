@@ -13,7 +13,7 @@ class UserUtils {
 
 
     static sqlGetReactPosts(userId) {
-        return `SELECT postId FROM UsersLikesPosts WHERE userId = "${userId}"`
+        return `SELECT postId FROM UsersReactPosts WHERE userId = "${userId}"`
     }
 
     static sqlAddReactPost(data) {

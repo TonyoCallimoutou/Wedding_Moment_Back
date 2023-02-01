@@ -14,8 +14,20 @@ module.exports = app => {
     // Delete Event with id
     router.delete("/:id", events.deleteEvent);
 
+    // Create new Menu
+    router.post("/Menu", events.createMenu);
+
+    // Retrieve Menu
+    router.get("/Menu/:id", events.getMenu);
+
+    // Delete Menu with id
+    router.delete("/Menu/:id", events.deleteMenu);
+
     // Create new Event
     router.post("/PlanTable", events.createPlanTable);
+
+    // Retrieve PlanTable
+    router.get("/PlanTable/:id", events.getPlanTable);
 
     // Delete Event with id
     router.delete("/PlanTable/:id", events.deletePlanTable);

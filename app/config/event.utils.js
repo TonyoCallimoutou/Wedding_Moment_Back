@@ -13,18 +13,39 @@ class EventsUtils {
                 WHERE eventId = ${eventId}`
     }
 
+    static sqlCreateMenu(data) {
+        return `INSERT INTO Menus (eventId, menuCategorie, menuDescription)
+                VALUES (${data.eventId},"${data.menuCategorie}", "${data.menuDescription}")`
+    }
+
+    static sqlGetMenu(eventId) {
+        return `SELECT * FROM Menus
+                WHERE eventId = ${eventId}`
+    }
+
+    static sqlDeleteMenu(menuId) {
+        return `DELETE FROM Menus
+                WHERE menuId = ${menuId}`
+    }
+
     static sqlCreatePlanTable(data) {
         return `INSERT INTO PlanTables (tableName, eventId)
                 VALUES ("${data.tableName}", ${data.eventId})`
     }
 
-    static sqlDeletePlanTable(planeTableId) {
+    static sqlGetPlanTable(eventId) {
+        return `SELECT PlanTables.planTableId, eventId, tableName, inviteId, inviteName FROM PlanTables
+                LEFT JOIN invites ON invites.planTableId = PlanTables.planTableId
+                WHERE eventId = ${eventId}`
+    }
+
+    static sqlDeletePlanTable(planTableId) {
         return `DELETE FROM PlanTables
-                WHERE planeTableId = ${planeTableId}`
+                WHERE planTableId = ${planTableId}`
     }
 
     static sqlCreateInvite(data) {
-        return `INSERT INTO Invites
+        return `INSERT INTO Invites (planTableId, inviteName)
                 VALUES (${data.planTableId}, "${data.inviteName}")`
     }
 

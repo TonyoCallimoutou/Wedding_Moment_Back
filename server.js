@@ -72,31 +72,55 @@ io.on('connection', (socket) => {
     });
 
     socket.on('removePost', (post) => {
-        io.emit('ListeningRemovePost', post)
+        io.emit('listeningRemovePost', post)
     });
 
     socket.on('setPost', (post) => {
-        io.emit('ListeningSetPost', post)
+        io.emit('listeningSetPost', post)
     });
 
     socket.on('setEvent', (event) => {
-        io.emit('ListeningSetEvent', event)
+        io.emit('listeningSetEvent', event)
+    });
+
+    socket.on('addInvite', (invite) => {
+        io.emit('listeningAddInvite', invite)
+    });
+
+    socket.on('removeInvite', (invite) => {
+        io.emit('listeningRemoveInvite', invite)
     });
 
     socket.on('setInvite', (invite) => {
-        io.emit('ListeningSetInvite', invite)
+        io.emit('listeningSetInvite', invite)
+    });
+
+    socket.on('addPlanTable', (planTable) => {
+        io.emit('listeningAddPlanTable', planTable)
+    });
+
+    socket.on('removePlanTable', (planTable) => {
+        io.emit('listeningRemovePlanTable', planTable)
     });
 
     socket.on('setPlanTable', (planTable) => {
-        io.emit('ListeningSetPlanTable', planTable)
+        io.emit('listeningSetPlanTable', planTable)
+    });
+
+    socket.on('addMenu', (menu) => {
+        io.emit('listeningAddMenu', menu)
+    });
+
+    socket.on('removeMenu', (menu) => {
+        io.emit('listeningRemoveMenu', menu)
     });
 
     socket.on('setMenu', (menu) => {
-        io.emit('ListeningSetMenu', menu)
+        io.emit('listeningSetMenu', menu)
     });
 
     socket.on('setUser', (user) => {
-        io.emit('ListeningSetUser', user)
+        io.emit('listeningSetUser', user)
     });
 
 });
