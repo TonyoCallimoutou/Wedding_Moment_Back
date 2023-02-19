@@ -24,9 +24,9 @@ module.exports = app => {
 
     // Retrieve Notification
     router.get("/notification", users.getNotification);
-  
+
     // Delete a Users with id
     router.delete("/:id", users.deleteUser);
-  
+
     app.use('/api/users', router);
-  };
+};

@@ -7,10 +7,10 @@ module.exports = app => {
 
     // Retrieve all Event
     router.get("/", events.getAllEvent);
-  
+
     // Create new Event
     router.post("/", events.createEvent);
-  
+
     // Delete Event with id
     router.delete("/:id", events.deleteEvent);
 
@@ -36,10 +36,10 @@ module.exports = app => {
     router.post("/Invite", events.createInvite);
 
     // Set Invites
-    router.post ("/setInvite", events.setInvite);
+    router.post("/setInvite", events.setInvite);
 
     // Delete Event with id
     router.delete("/Invite/:id", events.deleteInvite);
-  
+
     app.use('/api/events', router);
-  };
+};

@@ -6,37 +6,37 @@ const Posts = require("../model/posts.model");
 
 // Create and Save a new Event
 exports.createEvent = (req, res) => {
-    
+
     if (!req.body) {
         res.status(400).send({
-          message: "Content can not be empty!"
+            message: "Content can not be empty!"
         });
-      }
-    
-      const event = new Events({
-          eventId : req.body.eventId,
-          userId : req.body.userId,
-          name : req.body.name,
-          menuId : req.body.menuId,
-          menuCategorie : req.body.menuCategorie,
-          menuDescription: req.body.menuDescription,
-          planTableId: req.body.planTableId,
-          tableName: req.body.tableName,
-          inviteId: req.body.inviteId,
-          inviteName: req.body.inviteName,
-      });
-    
-      // Save Event in the database
-      Events.createEvent(event, (err, result) => {
+    }
+
+    const event = new Events({
+        eventId: req.body.eventId,
+        userId: req.body.userId,
+        name: req.body.name,
+        menuId: req.body.menuId,
+        menuCategorie: req.body.menuCategorie,
+        menuDescription: req.body.menuDescription,
+        planTableId: req.body.planTableId,
+        tableName: req.body.tableName,
+        inviteId: req.body.inviteId,
+        inviteName: req.body.inviteName,
+    });
+
+    // Save Event in the database
+    Events.createEvent(event, (err, result) => {
         if (err)
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while creating the Event."
-          });
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while creating the Event."
+            });
         else {
             res.send(result)
         }
-      });
+    });
 };
 
 exports.getAllEvent = (req, res) => {
@@ -90,11 +90,11 @@ exports.createMenu = (req, res) => {
     }
 
     const event = new Events({
-        eventId : req.body.eventId,
-        userId : req.body.userId,
-        name : req.body.name,
-        menuId : req.body.menuId,
-        menuCategorie : req.body.menuCategorie,
+        eventId: req.body.eventId,
+        userId: req.body.userId,
+        name: req.body.name,
+        menuId: req.body.menuId,
+        menuCategorie: req.body.menuCategorie,
         menuDescription: req.body.menuDescription,
         planTableId: req.body.planTableId,
         tableName: req.body.tableName,
@@ -168,11 +168,11 @@ exports.createPlanTable = (req, res) => {
     }
 
     const event = new Events({
-        eventId : req.body.eventId,
-        userId : req.body.userId,
-        name : req.body.name,
-        menuId : req.body.menuId,
-        menuCategorie : req.body.menuCategorie,
+        eventId: req.body.eventId,
+        userId: req.body.userId,
+        name: req.body.name,
+        menuId: req.body.menuId,
+        menuCategorie: req.body.menuCategorie,
         menuDescription: req.body.menuDescription,
         planTableId: req.body.planTableId,
         tableName: req.body.tableName,
@@ -248,11 +248,11 @@ exports.createInvite = (req, res) => {
     }
 
     const event = new Events({
-        eventId : req.body.eventId,
-        userId : req.body.userId,
-        name : req.body.name,
-        menuId : req.body.menuId,
-        menuCategorie : req.body.menuCategorie,
+        eventId: req.body.eventId,
+        userId: req.body.userId,
+        name: req.body.name,
+        menuId: req.body.menuId,
+        menuCategorie: req.body.menuCategorie,
         menuDescription: req.body.menuDescription,
         planTableId: req.body.planTableId,
         tableName: req.body.tableName,
@@ -274,7 +274,7 @@ exports.createInvite = (req, res) => {
 };
 
 exports.setInvite = (req, res) => {
-    Events.setInvite(req.body,(err, data) => {
+    Events.setInvite(req.body, (err, data) => {
         if (err)
             res.status(500).send({
                 message:

@@ -5,26 +5,30 @@ class EventsUtils {
     }
 
     static sqlGetAllEvent() {
-        return `SELECT * FROM Events`
+        return `SELECT *
+                FROM Events`
     }
 
     static sqlDeleteEvent(eventId) {
-        return `DELETE FROM Events
+        return `DELETE
+                FROM Events
                 WHERE eventId = ${eventId}`
     }
 
     static sqlCreateMenu(data) {
         return `INSERT INTO Menus (eventId, menuCategorie, menuDescription)
-                VALUES (${data.eventId},"${data.menuCategorie}", "${data.menuDescription}")`
+                VALUES (${data.eventId}, "${data.menuCategorie}", "${data.menuDescription}")`
     }
 
     static sqlGetMenu(eventId) {
-        return `SELECT * FROM Menus
+        return `SELECT *
+                FROM Menus
                 WHERE eventId = ${eventId}`
     }
 
     static sqlDeleteMenu(menuId) {
-        return `DELETE FROM Menus
+        return `DELETE
+                FROM Menus
                 WHERE menuId = ${menuId}`
     }
 
@@ -34,13 +38,15 @@ class EventsUtils {
     }
 
     static sqlGetPlanTable(eventId) {
-        return `SELECT PlanTables.planTableId, eventId, tableName, inviteId, inviteName FROM PlanTables
-                LEFT JOIN invites ON invites.planTableId = PlanTables.planTableId
+        return `SELECT PlanTables.planTableId, eventId, tableName, inviteId, inviteName
+                FROM PlanTables
+                         LEFT JOIN invites ON invites.planTableId = PlanTables.planTableId
                 WHERE eventId = ${eventId}`
     }
 
     static sqlDeletePlanTable(planTableId) {
-        return `DELETE FROM PlanTables
+        return `DELETE
+                FROM PlanTables
                 WHERE planTableId = ${planTableId}`
     }
 
@@ -56,7 +62,8 @@ class EventsUtils {
     }
 
     static sqlDeleteInvite(inviteId) {
-        return `DELETE FROM Invites
+        return `DELETE
+                FROM Invites
                 WHERE inviteId = ${inviteId}`
     }
 }

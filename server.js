@@ -16,7 +16,7 @@ const normalizePort = val => {
     return false;
 };
 
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 const errorHandler = error => {
@@ -36,7 +36,7 @@ const errorHandler = error => {
             break;
         default:
             throw error;
-        }
+    }
 };
 
 const server = http.createServer(app);
@@ -48,10 +48,10 @@ server.on('listening', () => {
     console.log('Listening on ' + bind);
 });
 
-const io = socketIo(server,  {
+const io = socketIo(server, {
     cors: {
-      origin: "*",
-      credentials: true
+        origin: "*",
+        credentials: true
     }
 });
 
@@ -64,7 +64,7 @@ io.on('connection', (socket) => {
     console.log('a user connected');
 
     socket.on('disconnect', () => {
-      console.log('user disconnected');
+        console.log('user disconnected');
     });
 
     socket.on('addPost', (post) => {
