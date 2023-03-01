@@ -154,7 +154,7 @@ Event.createInvite = (data, result) => {
             return;
         }
 
-        data.planTableId = res.insertId
+        data.inviteId = res.insertId
         result(null, data);
 
     });

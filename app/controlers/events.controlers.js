@@ -180,8 +180,6 @@ exports.createPlanTable = (req, res) => {
         inviteName: req.body.inviteName,
     });
 
-    console.log(event);
-
     // Save Event in the database
     Events.createPlanTable(event, (err, result) => {
         if (err)
