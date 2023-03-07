@@ -20,6 +20,11 @@ class EventsUtils {
                 VALUES (${data.eventId}, "${data.menuCategorie}", "${data.menuDescription}")`
     }
 
+    static sqlUpdateMenu(data) {
+        return `REPLACE INTO Menus (menuId, eventId, menuCategorie, menuDescription)
+                VALUES (${data.menuId}, ${data.eventId}, "${data.menuCategorie}", "${data.menuDescription}")`
+    }
+
     static sqlGetMenu(eventId) {
         return `SELECT *
                 FROM Menus

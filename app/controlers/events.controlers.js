@@ -115,6 +115,41 @@ exports.createMenu = (req, res) => {
     });
 };
 
+// Update Menu
+exports.updateMenu = (req, res) => {
+
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+
+    const event = new Events({
+        eventId: req.body.eventId,
+        userId: req.body.userId,
+        name: req.body.name,
+        menuId: req.body.menuId,
+        menuCategorie: req.body.menuCategorie,
+        menuDescription: req.body.menuDescription,
+        planTableId: req.body.planTableId,
+        tableName: req.body.tableName,
+        inviteId: req.body.inviteId,
+        inviteName: req.body.inviteName,
+    });
+
+    // Save Event in the database
+    Events.updateMenu(event, (err, result) => {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while creating the Event."
+            });
+        else {
+            res.send(result)
+        }
+    });
+};
+
 exports.getMenu = (req, res) => {
 
     const eventId = req.params.id;

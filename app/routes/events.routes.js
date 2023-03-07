@@ -17,6 +17,9 @@ module.exports = app => {
     // Create new Menu
     router.post("/Menu", events.createMenu);
 
+    // Create new Menu
+    router.put("/Menu", events.updateMenu);
+
     // Retrieve Menu
     router.get("/Menu/:id", events.getMenu);
 

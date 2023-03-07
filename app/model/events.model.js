@@ -67,10 +67,20 @@ Event.createMenu = (data, result) => {
             result(err, null);
             return;
         }
-
         data.menuId = res.insertId
         result(null, data);
+    });
+};
 
+Event.updateMenu = (data, result) => {
+    sql.query(eventUtils.sqlUpdateMenu(data), (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        data.menuId = res.insertId
+        result(null, data);
     });
 };
 
