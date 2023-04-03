@@ -9,6 +9,12 @@ class EventsUtils {
                 FROM Events`
     }
 
+    static sqlUpdateEventPicture(data) {
+        return `UPDATE Events
+                SET pictureUrl = "${data.pictureUrl}"
+                WHERE eventId = ${data.eventId}`
+    }
+
     static sqlDeleteEvent(eventId) {
         return `DELETE
                 FROM Events

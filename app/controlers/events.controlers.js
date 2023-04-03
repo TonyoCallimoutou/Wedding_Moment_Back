@@ -17,6 +17,7 @@ exports.createEvent = (req, res) => {
         eventId: req.body.eventId,
         userId: req.body.userId,
         name: req.body.name,
+        pictureUrl: req.body.pictureUrl,
         menuId: req.body.menuId,
         menuCategorie: req.body.menuCategorie,
         menuDescription: req.body.menuDescription,
@@ -50,6 +51,44 @@ exports.getAllEvent = (req, res) => {
         else res.send(data);
     });
 }
+
+// Update Event
+exports.updateEventPicture = (req, res) => {
+
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+    console.log(req);
+
+    const event = new Events({
+        eventId: req.body.eventId,
+        userId: req.body.userId,
+        name: req.body.name,
+        pictureUrl: req.body.pictureUrl,
+        menuId: req.body.menuId,
+        menuCategorie: req.body.menuCategorie,
+        menuDescription: req.body.menuDescription,
+        planTableId: req.body.planTableId,
+        tableName: req.body.tableName,
+        inviteId: req.body.inviteId,
+        inviteName: req.body.inviteName,
+    });
+
+    // Save Event in the database
+    Events.updateEventPicture(event, (err, result) => {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while creating the Event."
+            });
+        else {
+            res.send(result)
+        }
+    });
+};
+
 
 // Delete Event by id.
 exports.deleteEvent = (req, res) => {
@@ -93,6 +132,7 @@ exports.createMenu = (req, res) => {
         eventId: req.body.eventId,
         userId: req.body.userId,
         name: req.body.name,
+        pictureUrl: req.body.pictureUrl,
         menuId: req.body.menuId,
         menuCategorie: req.body.menuCategorie,
         menuDescription: req.body.menuDescription,
@@ -128,6 +168,7 @@ exports.updateMenu = (req, res) => {
         eventId: req.body.eventId,
         userId: req.body.userId,
         name: req.body.name,
+        pictureUrl: req.body.pictureUrl,
         menuId: req.body.menuId,
         menuCategorie: req.body.menuCategorie,
         menuDescription: req.body.menuDescription,
@@ -206,6 +247,7 @@ exports.createPlanTable = (req, res) => {
         eventId: req.body.eventId,
         userId: req.body.userId,
         name: req.body.name,
+        pictureUrl: req.body.pictureUrl,
         menuId: req.body.menuId,
         menuCategorie: req.body.menuCategorie,
         menuDescription: req.body.menuDescription,
@@ -284,6 +326,7 @@ exports.createInvite = (req, res) => {
         eventId: req.body.eventId,
         userId: req.body.userId,
         name: req.body.name,
+        pictureUrl: req.body.pictureUrl,
         menuId: req.body.menuId,
         menuCategorie: req.body.menuCategorie,
         menuDescription: req.body.menuDescription,

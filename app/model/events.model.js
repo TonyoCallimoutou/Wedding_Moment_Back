@@ -6,6 +6,7 @@ const Event = function (event) {
     this.eventId = event.eventId;
     this.userId = event.userId;
     this.name = event.name;
+    this.pictureUrl = event.pictureUrl;
     this.menuId = event.menuId;
     this.menuCategorie = event.menuCategorie;
     this.menuDescription = event.menuDescription;
@@ -40,6 +41,17 @@ Event.getAllEvent = (result) => {
         result(null, res);
     })
 }
+
+Event.updateEventPicture = (data, result) => {
+    sql.query(eventUtils.sqlUpdateEventPicture(data), (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        result(null, data);
+    });
+};
 
 // Delete Event by id.
 Event.deleteEvent = (id, result) => {

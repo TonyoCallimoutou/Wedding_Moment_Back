@@ -11,6 +11,9 @@ module.exports = app => {
     // Create new Event
     router.post("/", events.createEvent);
 
+    // Set Event
+    router.put("/setEventPicture", events.updateEventPicture);
+
     // Delete Event with id
     router.delete("/:id", events.deleteEvent);
 
@@ -39,7 +42,7 @@ module.exports = app => {
     router.post("/Invite", events.createInvite);
 
     // Set Invites
-    router.post("/setInvite", events.setInvite);
+    router.put("/setInvite", events.setInvite);
 
     // Delete Event with id
     router.delete("/Invite/:id", events.deleteInvite);
