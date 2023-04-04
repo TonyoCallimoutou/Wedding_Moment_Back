@@ -14,6 +14,9 @@ module.exports = app => {
     // Set Event
     router.put("/setEventPicture", events.updateEventPicture);
 
+    // Set Event
+    router.put("/setEventPresentation", events.updateEventPresentation);
+
     // Delete Event with id
     router.delete("/:id", events.deleteEvent);
 

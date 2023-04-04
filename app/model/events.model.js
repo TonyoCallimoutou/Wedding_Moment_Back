@@ -7,6 +7,9 @@ const Event = function (event) {
     this.userId = event.userId;
     this.name = event.name;
     this.pictureUrl = event.pictureUrl;
+    this.presentationText = event.presentationText;
+    this.presentationTextSize = event.presentationTextSize;
+    this.presentationTextAlign = event.presentationTextAlign;
     this.menuId = event.menuId;
     this.menuCategorie = event.menuCategorie;
     this.menuDescription = event.menuDescription;
@@ -44,6 +47,17 @@ Event.getAllEvent = (result) => {
 
 Event.updateEventPicture = (data, result) => {
     sql.query(eventUtils.sqlUpdateEventPicture(data), (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        result(null, data);
+    });
+};
+
+Event.updateEventPresentation = (data, result) => {
+    sql.query(eventUtils.sqlUpdateEventPresentation(data), (err, res) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);

@@ -15,6 +15,14 @@ class EventsUtils {
                 WHERE eventId = ${data.eventId}`
     }
 
+    static sqlUpdateEventPresentation(data) {
+        return `UPDATE Events
+                SET presentationText = "${data.presentationText}" ,
+                    presentationTextSize = ${data.presentationTextSize} ,
+                    presentationTextAlign = "${data.presentationTextAlign}"
+                WHERE eventId = ${data.eventId}`
+    }
+
     static sqlDeleteEvent(eventId) {
         return `DELETE
                 FROM Events

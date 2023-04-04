@@ -4,6 +4,26 @@ const postUtils = require("../config/post.utils");
 const Posts = require("../model/posts.model");
 
 
+function create(body) {
+    return new Events({
+        eventId: body.eventId,
+        userId: body.userId,
+        name: body.name,
+        pictureUrl: body.pictureUrl,
+        presentationText: body.presentationText,
+        presentationTextSize: body.presentationTextSize,
+        presentationTextAlign: body.presentationTextAlign,
+        menuId: body.menuId,
+        menuCategorie: body.menuCategorie,
+        menuDescription: body.menuDescription,
+        planTableId: body.planTableId,
+        tableName: body.tableName,
+        inviteId: body.inviteId,
+        inviteName: body.inviteName,
+    })
+}
+
+
 // Create and Save a new Event
 exports.createEvent = (req, res) => {
 
@@ -13,19 +33,7 @@ exports.createEvent = (req, res) => {
         });
     }
 
-    const event = new Events({
-        eventId: req.body.eventId,
-        userId: req.body.userId,
-        name: req.body.name,
-        pictureUrl: req.body.pictureUrl,
-        menuId: req.body.menuId,
-        menuCategorie: req.body.menuCategorie,
-        menuDescription: req.body.menuDescription,
-        planTableId: req.body.planTableId,
-        tableName: req.body.tableName,
-        inviteId: req.body.inviteId,
-        inviteName: req.body.inviteName,
-    });
+    const event = create(req.body);
 
     // Save Event in the database
     Events.createEvent(event, (err, result) => {
@@ -62,22 +70,34 @@ exports.updateEventPicture = (req, res) => {
     }
     console.log(req);
 
-    const event = new Events({
-        eventId: req.body.eventId,
-        userId: req.body.userId,
-        name: req.body.name,
-        pictureUrl: req.body.pictureUrl,
-        menuId: req.body.menuId,
-        menuCategorie: req.body.menuCategorie,
-        menuDescription: req.body.menuDescription,
-        planTableId: req.body.planTableId,
-        tableName: req.body.tableName,
-        inviteId: req.body.inviteId,
-        inviteName: req.body.inviteName,
-    });
+    const event = create(req.body);
 
     // Save Event in the database
     Events.updateEventPicture(event, (err, result) => {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while creating the Event."
+            });
+        else {
+            res.send(result)
+        }
+    });
+};
+
+exports.updateEventPresentation = (req, res) => {
+
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+    console.log(req);
+
+    const event = create(req.body);
+
+    // Save Event in the database
+    Events.updateEventPresentation(event, (err, result) => {
         if (err)
             res.status(500).send({
                 message:
@@ -128,19 +148,8 @@ exports.createMenu = (req, res) => {
         });
     }
 
-    const event = new Events({
-        eventId: req.body.eventId,
-        userId: req.body.userId,
-        name: req.body.name,
-        pictureUrl: req.body.pictureUrl,
-        menuId: req.body.menuId,
-        menuCategorie: req.body.menuCategorie,
-        menuDescription: req.body.menuDescription,
-        planTableId: req.body.planTableId,
-        tableName: req.body.tableName,
-        inviteId: req.body.inviteId,
-        inviteName: req.body.inviteName,
-    });
+    const event = create(req.body);
+
 
     // Save Event in the database
     Events.createMenu(event, (err, result) => {
@@ -164,19 +173,8 @@ exports.updateMenu = (req, res) => {
         });
     }
 
-    const event = new Events({
-        eventId: req.body.eventId,
-        userId: req.body.userId,
-        name: req.body.name,
-        pictureUrl: req.body.pictureUrl,
-        menuId: req.body.menuId,
-        menuCategorie: req.body.menuCategorie,
-        menuDescription: req.body.menuDescription,
-        planTableId: req.body.planTableId,
-        tableName: req.body.tableName,
-        inviteId: req.body.inviteId,
-        inviteName: req.body.inviteName,
-    });
+    const event = create(req.body);
+
 
     // Save Event in the database
     Events.updateMenu(event, (err, result) => {
@@ -243,19 +241,8 @@ exports.createPlanTable = (req, res) => {
         });
     }
 
-    const event = new Events({
-        eventId: req.body.eventId,
-        userId: req.body.userId,
-        name: req.body.name,
-        pictureUrl: req.body.pictureUrl,
-        menuId: req.body.menuId,
-        menuCategorie: req.body.menuCategorie,
-        menuDescription: req.body.menuDescription,
-        planTableId: req.body.planTableId,
-        tableName: req.body.tableName,
-        inviteId: req.body.inviteId,
-        inviteName: req.body.inviteName,
-    });
+    const event = create(req.body);
+
 
     // Save Event in the database
     Events.createPlanTable(event, (err, result) => {
@@ -322,19 +309,8 @@ exports.createInvite = (req, res) => {
         });
     }
 
-    const event = new Events({
-        eventId: req.body.eventId,
-        userId: req.body.userId,
-        name: req.body.name,
-        pictureUrl: req.body.pictureUrl,
-        menuId: req.body.menuId,
-        menuCategorie: req.body.menuCategorie,
-        menuDescription: req.body.menuDescription,
-        planTableId: req.body.planTableId,
-        tableName: req.body.tableName,
-        inviteId: req.body.inviteId,
-        inviteName: req.body.inviteName,
-    });
+    const event = create(req.body);
+
 
     // Save Event in the database
     Events.createInvite(event, (err, result) => {
