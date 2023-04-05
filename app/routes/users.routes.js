@@ -10,6 +10,9 @@ module.exports = app => {
     // Set Users PhotUrl
     router.post("/photoUrl", users.setPhotoUrl);
 
+    // Set UsersName
+    router.put("/userName", users.setUserName);
+
     // Retrieve User by id
     router.get("/:id", users.getUserById);
 

@@ -24,7 +24,7 @@ User.createUser = (newUser, result) => {
     });
 };
 
-// Set User Post
+// Set User
 User.setPhotoUrl = (userId, photoUrl, result) => {
     sql.query(userUtils.sqlSetPhotoUrl(userId, photoUrl), (err, res) => {
         if (err) {
@@ -34,6 +34,19 @@ User.setPhotoUrl = (userId, photoUrl, result) => {
         }
 
         result(null, {userId});
+    });
+};
+
+// Set User
+User.setUserName = (data, result) => {
+    sql.query(userUtils.sqlSetUserName(data), (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        result(null, data);
     });
 };
 

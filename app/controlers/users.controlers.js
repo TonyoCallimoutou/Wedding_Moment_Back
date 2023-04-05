@@ -40,7 +40,27 @@ exports.setPhotoUrl = (req, res) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while setting User's post"
+                    err.message || "Some error occurred while setting User's Photo url"
+            });
+        else {
+            res.send(req.body)
+        }
+    });
+
+}
+
+exports.setUserName = (req, res) => {
+
+    const user = new Users({
+        userId: req.body.userId,
+        userName: req.body.userName,
+    });
+
+    Users.setUserName(user, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while setting User's Name"
             });
         else {
             res.send(req.body)

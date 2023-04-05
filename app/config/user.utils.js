@@ -11,6 +11,12 @@ class UserUtils {
                 WHERE userId = '${userId}'`
     }
 
+    static sqlSetUserName(data) {
+        return `UPDATE users
+                set userName = "${data.userName}"
+                WHERE userId = "${data.userId}"`
+    }
+
     static sqlGetUserById(userId) {
         return `SELECT *
                 FROM users
