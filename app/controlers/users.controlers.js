@@ -34,6 +34,19 @@ exports.createUser = (req, res) => {
     });
 };
 
+exports.setVerified = (req, res) => {
+    Users.setUserVerified(req.body.userId, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while setting User's verification"
+            });
+        else {
+            res.send(req.body)
+        }
+    });
+}
+
 exports.setPhotoUrl = (req, res) => {
 
     Users.setPhotoUrl(req.body.userId, req.body.photoUrl, (err, data) => {

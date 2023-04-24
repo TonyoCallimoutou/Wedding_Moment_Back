@@ -8,6 +8,9 @@ module.exports = app => {
     router.post("/", users.createUser);
 
     // Set Users PhotUrl
+    router.put("/userVerified", users.setVerified);
+
+    // Set Users PhotUrl
     router.put("/photoUrl", users.setPhotoUrl);
 
     // Set UsersName

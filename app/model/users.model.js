@@ -24,6 +24,18 @@ User.createUser = (newUser, result) => {
     });
 };
 
+User.setUserVerified = (userId, result) => {
+    sql.query(userUtils.sqlSetUserVerified(userId), (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        result(null, {userId});
+    });
+}
+
 // Set User
 User.setPhotoUrl = (userId, photoUrl, result) => {
     sql.query(userUtils.sqlSetPhotoUrl(userId, photoUrl), (err, res) => {

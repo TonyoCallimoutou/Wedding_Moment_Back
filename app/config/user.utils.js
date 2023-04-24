@@ -5,6 +5,12 @@ class UserUtils {
                         ${data.emailVerified})`
     }
 
+    static sqlSetUserVerified(userId) {
+        return `UPDATE users
+                set emailVerified = true
+                WHERE userId = '${userId}'`
+    }
+
     static sqlSetPhotoUrl(userId, photoUrl) {
         return `UPDATE users
                 set photoUrl = '${photoUrl}'
