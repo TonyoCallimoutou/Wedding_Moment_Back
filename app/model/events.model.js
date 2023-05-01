@@ -45,6 +45,17 @@ Event.getAllEvent = (result) => {
     })
 }
 
+Event.getEventById= (eventId, result) => {
+    sql.query(eventUtils.sqlGetEventById(eventId), (err, res) => {
+        if (err || res.length === 0) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        result(null, res[0]);
+    })
+}
+
 Event.updateEventPicture = (data, result) => {
     sql.query(eventUtils.sqlUpdateEventPicture(data), (err, res) => {
         if (err) {

@@ -9,6 +9,12 @@ class EventsUtils {
                 FROM Events`
     }
 
+    static sqlGetEventById(eventId) {
+        return `SELECT *
+                FROM Events
+                WHERE eventId = ${eventId}`
+    }
+
     static sqlUpdateEventPicture(data) {
         return `UPDATE Events
                 SET pictureUrl = "${data.pictureUrl}"

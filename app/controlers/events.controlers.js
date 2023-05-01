@@ -60,6 +60,26 @@ exports.getAllEvent = (req, res) => {
     });
 }
 
+exports.getEventById = (req, res) => {
+
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+
+    const eventId = req.params.id;
+
+    Events.getEventById(eventId, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Post."
+            });
+        else res.send(data);
+    });
+}
+
 // Update Event
 exports.updateEventPicture = (req, res) => {
 

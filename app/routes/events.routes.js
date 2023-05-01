@@ -8,6 +8,9 @@ module.exports = app => {
     // Retrieve all Event
     router.get("/", events.getAllEvent);
 
+    // Retrieve Event
+    router.get("/:id", events.getEventById);
+
     // Create new Event
     router.post("/", events.createEvent);
 
