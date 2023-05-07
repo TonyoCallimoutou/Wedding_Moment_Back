@@ -1,7 +1,7 @@
 class PostUtils {
     static sqlCreatePost(data) {
-        return `INSERT INTO posts (userId, eventId, pictureUrl)
-                Values ('${data.userId}', ${data.eventId}, "${data.pictureUrl}")`
+        return `INSERT INTO posts (userId, eventId, pictureUrl, pictureRatio)
+                Values ('${data.userId}', ${data.eventId}, "${data.pictureUrl}", ${data.pictureRatio})`
     }
 
     static sqlGetAllPost(eventId) {

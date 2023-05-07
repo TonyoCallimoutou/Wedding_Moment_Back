@@ -6,6 +6,7 @@ const Post = function (post) {
     this.postId = post.postId;
     this.eventId = post.eventId;
     this.pictureUrl = post.pictureUrl;
+    this.pictureRatio = post.pictureRatio;
     this.countReact = post.countReact;
     this.userId = post.userId;
     this.userName = post.userName;

@@ -13,6 +13,7 @@ exports.createPost = (req, res) => {
         postId: req.body.postId,
         eventId: req.body.eventId,
         pictureUrl: req.body.pictureUrl,
+        pictureRatio: req.body.pictureRatio,
         countReact: req.body.countReact,
         userId: req.body.userId,
         userName: req.body.userName,
