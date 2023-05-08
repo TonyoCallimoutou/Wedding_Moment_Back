@@ -8,7 +8,8 @@ class PostUtils {
         return `SELECT *
                 FROM posts
                          NATURAL JOIN users
-                WHERE eventId = ${eventId}`
+                WHERE eventId = ${eventId}
+                ORDER BY publicationDate DESC`
     }
 
 
