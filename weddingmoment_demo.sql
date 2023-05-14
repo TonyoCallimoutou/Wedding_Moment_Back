@@ -1,4 +1,4 @@
-use weddingmoments;
+use weddingmoment;
 	
 INSERT INTO Users (userId, email, userName, emailVerified, photoUrl) 
 	VALUES

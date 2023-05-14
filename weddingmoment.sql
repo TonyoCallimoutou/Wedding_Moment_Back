@@ -1,6 +1,6 @@
-drop database if exists weddingmoments;
-create database weddingmoments;
-use weddingmoments;
+drop database if exists weddingmoment;
+create database weddingmoment;
+use weddingmoment;
 
 CREATE TABLE Users (
 	userId VARCHAR(45) NOT NULL,
