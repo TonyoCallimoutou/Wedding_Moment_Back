@@ -1,31 +1,31 @@
 class UserUtils {
     static sqlCreateUser(data) {
-        return `INSERT INTO users (userId, email, userName, photoUrl, emailVerified)
+        return `INSERT INTO Users (userId, email, userName, photoUrl, emailVerified)
                 Values ('${data.userId}', '${data.email}', '${data.userName}', '${data.photoUrl}',
                         ${data.emailVerified})`
     }
 
     static sqlSetUserVerified(userId) {
-        return `UPDATE users
+        return `UPDATE Users
                 set emailVerified = true
                 WHERE userId = '${userId}'`
     }
 
     static sqlSetPhotoUrl(userId, photoUrl) {
-        return `UPDATE users
+        return `UPDATE Users
                 set photoUrl = '${photoUrl}'
                 WHERE userId = '${userId}'`
     }
 
     static sqlSetUserName(data) {
-        return `UPDATE users
+        return `UPDATE Users
                 set userName = "${data.userName}"
                 WHERE userId = "${data.userId}"`
     }
 
     static sqlGetUserById(userId) {
         return `SELECT *
-                FROM users
+                FROM Users
                 WHERE userId = '${userId}'`
     }
 

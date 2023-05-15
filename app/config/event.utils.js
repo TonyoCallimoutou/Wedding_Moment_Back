@@ -65,7 +65,7 @@ class EventsUtils {
     static sqlGetPlanTable(eventId) {
         return `SELECT PlanTables.planTableId, eventId, tableName, inviteId, inviteName
                 FROM PlanTables
-                         LEFT JOIN invites ON invites.planTableId = PlanTables.planTableId
+                         LEFT JOIN Invites ON Invites.planTableId = PlanTables.planTableId
                 WHERE eventId = ${eventId}`
     }
 
@@ -81,7 +81,7 @@ class EventsUtils {
     }
 
     static sqlSetInvite(data) {
-        return `UPDATE invites
+        return `UPDATE Invites
                 SET planTableId = ${data.planTableId}
                 WHERE inviteId = ${data.inviteId}`
     }
