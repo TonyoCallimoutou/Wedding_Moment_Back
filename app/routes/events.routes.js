@@ -1,5 +1,4 @@
-const events = require("../controlers/events.controlers");
-const users = require("../controlers/users.controlers");
+const { checkAuthAndAdmin, checkAuth} = require("../config/auth");
 module.exports = app => {
     const events = require("../controlers/events.controlers.js");
 
@@ -12,46 +11,46 @@ module.exports = app => {
     router.get("/:id", events.getEventById);
 
     // Create new Event
-    router.post("/", events.createEvent);
+    router.post("/", checkAuth, events.createEvent);
 
     // Set Event
-    router.put("/setEventPicture", events.updateEventPicture);
+    router.put("/setEventPicture", checkAuthAndAdmin, events.updateEventPicture);
 
     // Set Event
-    router.put("/setEventPresentation", events.updateEventPresentation);
+    router.put("/setEventPresentation", checkAuthAndAdmin, events.updateEventPresentation);
 
     // Delete Event with id
-    router.delete("/:id", events.deleteEvent);
+    router.delete("/:id", checkAuthAndAdmin, events.deleteEvent);
 
     // Create new Menu
-    router.post("/Menu", events.createMenu);
+    router.post("/Menu", checkAuthAndAdmin, events.createMenu);
 
-    // Create new Menu
-    router.put("/Menu", events.updateMenu);
+    // Update Menu
+    router.put("/Menu", checkAuthAndAdmin, events.updateMenu);
 
     // Retrieve Menu
     router.get("/Menu/:id", events.getMenu);
 
     // Delete Menu with id
-    router.delete("/Menu/:id", events.deleteMenu);
+    router.delete("/Menu/:id", checkAuthAndAdmin, events.deleteMenu);
 
     // Create new Event
-    router.post("/PlanTable", events.createPlanTable);
+    router.post("/PlanTable", checkAuthAndAdmin, events.createPlanTable);
 
     // Retrieve PlanTable
     router.get("/PlanTable/:id", events.getPlanTable);
 
     // Delete Event with id
-    router.delete("/PlanTable/:id", events.deletePlanTable);
+    router.delete("/PlanTable/:id", checkAuthAndAdmin, events.deletePlanTable);
 
-    // Create new Event
-    router.post("/Invite", events.createInvite);
+    // Create new Invite
+    router.post("/Invite", checkAuthAndAdmin, events.createInvite);
 
     // Set Invites
-    router.put("/setInvite", events.setInvite);
+    router.put("/setInvite", checkAuthAndAdmin, events.setInvite);
 
-    // Delete Event with id
-    router.delete("/Invite/:id", events.deleteInvite);
+    // Delete Invites with id
+    router.delete("/Invite/:id", checkAuthAndAdmin, events.deleteInvite);
 
     app.use('/api/events', router);
 };
