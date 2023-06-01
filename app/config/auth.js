@@ -12,7 +12,6 @@ admin.initializeApp({
 exports.checkAuth = (req, res, next) => {
     if (req.headers.authorization) {
         let token = req.headers.authorization.split(' ')[1];
-        token = token.slice(1, -1);
         getAuth()
           .verifyIdToken(token)
           .then((decodedToken) => {
@@ -20,13 +19,13 @@ exports.checkAuth = (req, res, next) => {
                 next();
               }
               else {
-                console.log("Unauthorized, email not verified")
-                res.status(403).send('Unauthorized')
+                console.log("Unauthorized, email not verified : " + decodedToken.uid)
+                res.status(403).send('Unauthorized, email not verified')
               }
           })
           .catch((error) => {
               console.log(error)
-              res.status(403).send('Unauthorized')
+              res.status(403).send(error)
           });
     } else {
         res.status(403).send('Unauthorized')
@@ -36,7 +35,6 @@ exports.checkAuth = (req, res, next) => {
 exports.checkAuthAndAdmin = (req, res, next) => {
     if (req.headers.authorization) {
         let token = req.headers.authorization.split(' ')[1];
-        token = token.slice(1, -1);
         getAuth()
           .verifyIdToken(token)
           .then((decodedToken) => {
@@ -45,18 +43,18 @@ exports.checkAuthAndAdmin = (req, res, next) => {
                   next();
                 }
                 else {
-                  console.log("Unauthorized, email not verified")
-                  res.status(403).send('Unauthorized')
+                  console.log("Unauthorized, email not verified : "+ decodedToken.uid)
+                  res.status(403).send('Unauthorized, email not verified')
                 }
               }
               else {
-                  console.log("Unauthorized, not admin")
-                  res.status(403).send('Unauthorized')
+                  console.log("Unauthorized, not admin : "+ decodedToken.uid)
+                  res.status(403).send('Unauthorized, not admin')
               }
           })
           .catch((error) => {
               console.log(error)
-              res.status(403).send('Unauthorized')
+              res.status(403).send(error)
           });
     } else {
         res.status(403).send('Unauthorized')
