@@ -1,10 +1,10 @@
 pipeline {
   agent any
   stages {
-    stage('restart') {
+    stage('stop node') {
       steps {
         script {
-          sh 'docker restart back'
+          sh 'docker exec -w /app/ back pkill node'
         }
       }
     }
