@@ -25,7 +25,7 @@ pipeline {
     stage('npm start') {
       steps {
         script {
-          sh 'docker exec -d -w /app back npm start'
+          sh 'docker restart back'
         }
       }
     }
