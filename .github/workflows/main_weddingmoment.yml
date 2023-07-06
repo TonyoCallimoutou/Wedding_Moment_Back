@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'weddingmoment'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C3AC58849FEE4D44B7EA47E30C2AA919 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A5229136968E4D6882EEBA63D6798337 }}
           package: .
