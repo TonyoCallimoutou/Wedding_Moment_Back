@@ -62,6 +62,7 @@ exports.getAllEvent = (req, res) => {
 
 exports.getEventById = (req, res) => {
 
+
     if (!req.body) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -69,6 +70,7 @@ exports.getEventById = (req, res) => {
     }
 
     const eventId = req.params.id;
+    console.log(eventId);
 
     Events.getEventById(eventId, (err, data) => {
         if (err)

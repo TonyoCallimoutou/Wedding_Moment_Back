@@ -23,7 +23,7 @@ const Event = function (event) {
 Event.createEvent = (newEvent, result) => {
     sql.query(eventUtils.sqlCreateEvent(newEvent), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error createEvent: ", err);
             result(err, null);
             return;
         }
@@ -37,7 +37,7 @@ Event.createEvent = (newEvent, result) => {
 Event.getAllEvent = (result) => {
     sql.query(eventUtils.sqlGetAllEvent(), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error getAllEvent: ", err);
             result(err, null);
             return;
         }
@@ -48,7 +48,7 @@ Event.getAllEvent = (result) => {
 Event.getEventById= (eventId, result) => {
     sql.query(eventUtils.sqlGetEventById(eventId), (err, res) => {
         if (err || res.length === 0) {
-            console.log("error: ", err);
+            console.log("error getEventById: ", err);
             result(err, null);
             return;
         }
@@ -59,7 +59,7 @@ Event.getEventById= (eventId, result) => {
 Event.updateEventPicture = (data, result) => {
     sql.query(eventUtils.sqlUpdateEventPicture(data), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error updateEventPicture: ", err);
             result(err, null);
             return;
         }
@@ -70,7 +70,7 @@ Event.updateEventPicture = (data, result) => {
 Event.updateEventPresentation = (data, result) => {
     sql.query(eventUtils.sqlUpdateEventPresentation(data), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error updateEventPresentation: ", err);
             result(err, null);
             return;
         }
@@ -82,7 +82,7 @@ Event.updateEventPresentation = (data, result) => {
 Event.deleteEvent = (id, result) => {
     sql.query(eventUtils.sqlDeleteEvent(id), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error deleteEvent: ", err);
             result(null, err);
             return;
         }
@@ -100,7 +100,7 @@ Event.deleteEvent = (id, result) => {
 Event.createMenu = (data, result) => {
     sql.query(eventUtils.sqlCreateMenu(data), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error createMenu: ", err);
             result(err, null);
             return;
         }
@@ -112,7 +112,7 @@ Event.createMenu = (data, result) => {
 Event.updateMenu = (data, result) => {
     sql.query(eventUtils.sqlUpdateMenu(data), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error updateMenu: ", err);
             result(err, null);
             return;
         }
@@ -124,7 +124,7 @@ Event.updateMenu = (data, result) => {
 Event.getMenu = (id, result) => {
     sql.query(eventUtils.sqlGetMenu(id), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error getMenu: ", err);
             result(err, null);
             return;
         }
@@ -135,7 +135,7 @@ Event.getMenu = (id, result) => {
 Event.deleteMenu = (id, result) => {
     sql.query(eventUtils.sqlDeleteMenu(id), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error deleteMenu: ", err);
             result(null, err);
             return;
         }
@@ -153,7 +153,7 @@ Event.deleteMenu = (id, result) => {
 Event.createPlanTable = (data, result) => {
     sql.query(eventUtils.sqlCreatePlanTable(data), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error createPlanTable: ", err);
             result(err, null);
             return;
         }
@@ -167,7 +167,7 @@ Event.createPlanTable = (data, result) => {
 Event.getPlanTable = (id, result) => {
     sql.query(eventUtils.sqlGetPlanTable(id), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error getPlanTable: ", err);
             result(err, null);
             return;
         }
@@ -178,7 +178,7 @@ Event.getPlanTable = (id, result) => {
 Event.deletePlanTable = (id, result) => {
     sql.query(eventUtils.sqlDeletePlanTable(id), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error deletePlanTable: ", err);
             result(null, err);
             return;
         }
@@ -196,7 +196,7 @@ Event.deletePlanTable = (id, result) => {
 Event.createInvite = (data, result) => {
     sql.query(eventUtils.sqlCreateInvite(data), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error createInvite: ", err);
             result(err, null);
             return;
         }
@@ -210,7 +210,7 @@ Event.createInvite = (data, result) => {
 Event.setInvite = (data, result) => {
     sql.query(eventUtils.sqlSetInvite(data), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error setInvite: ", err);
             result(null, err);
             return;
         }
@@ -221,7 +221,7 @@ Event.setInvite = (data, result) => {
 Event.deleteInvite = (id, result) => {
     sql.query(eventUtils.sqlDeleteInvite(id), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error deleteInvite: ", err);
             result(null, err);
             return;
         }

@@ -15,7 +15,7 @@ const User = function (user) {
 User.createUser = (newUser, result) => {
     sql.query(userUtils.sqlCreateUser(newUser), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error createUser: ", err);
             result(err, null);
             return;
         }
@@ -27,7 +27,7 @@ User.createUser = (newUser, result) => {
 User.setUserVerified = (userId, result) => {
     sql.query(userUtils.sqlSetUserVerified(userId), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error setUserVerified: ", err);
             result(err, null);
             return;
         }
@@ -40,7 +40,7 @@ User.setUserVerified = (userId, result) => {
 User.setPhotoUrl = (userId, photoUrl, result) => {
     sql.query(userUtils.sqlSetPhotoUrl(userId, photoUrl), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error setPhotoUrl: ", err);
             result(err, null);
             return;
         }
@@ -53,7 +53,7 @@ User.setPhotoUrl = (userId, photoUrl, result) => {
 User.setUserName = (data, result) => {
     sql.query(userUtils.sqlSetUserName(data), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error setUserName: ", err);
             result(err, null);
             return;
         }
@@ -66,7 +66,7 @@ User.setUserName = (data, result) => {
 User.getUserById = (id, result) => {
     sql.query(userUtils.sqlGetUserById(id), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error getUserById: ", err);
             result(err, null);
             return;
         }
@@ -84,7 +84,7 @@ User.getUserById = (id, result) => {
 User.getReactPosts = (id, result) => {
     sql.query(userUtils.sqlGetReactPosts(id), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error getReactPosts: ", err);
             result(err, null);
             return;
         }
@@ -102,7 +102,7 @@ User.getReactPosts = (id, result) => {
 User.addReactPost = (data, result) => {
     sql.query(userUtils.sqlAddReactPost(data), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error addReactPost: ", err);
             result(err, null);
             return;
         }
@@ -128,7 +128,7 @@ User.unReactPost = (userId, postId, result) => {
 User.getNotification = (id, result) => {
     sql.query(userUtils.sqlGetNotification(id), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error getNotification: ", err);
             result(err, null);
             return;
         }
@@ -147,7 +147,7 @@ User.getNotification = (id, result) => {
 User.deleteUser = (id, result) => {
     sql.query(userUtils.sqlDeleteUser(id), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error deleteUser: ", err);
             result(null, err);
             return;
         }

@@ -17,7 +17,7 @@ const Post = function (post) {
 Post.createPost = (newPost, result) => {
     sql.query(postUtils.sqlCreatePost(newPost), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error createPost: ", err);
             result(err, null);
             return;
         }
@@ -31,7 +31,7 @@ Post.createPost = (newPost, result) => {
 Post.getAllPost = (eventId, result) => {
     sql.query(postUtils.sqlGetAllPost(eventId), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error getAllPost: ", err);
             result(err, null);
             return;
         }
@@ -44,7 +44,7 @@ Post.getAllPost = (eventId, result) => {
 Post.reactPost = (id, result) => {
     sql.query(postUtils.sqlReactPost(id), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error reactPost: ", err);
             result(null, err);
             return;
         }
@@ -56,7 +56,7 @@ Post.reactPost = (id, result) => {
 Post.unReactPost = (id, result) => {
     sql.query(postUtils.sqlUnReactPost(id), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error unReactPost: ", err);
             result(null, err);
             return;
         }
@@ -67,7 +67,7 @@ Post.unReactPost = (id, result) => {
 Post.setPicture = (data, result) => {
     sql.query(postUtils.sqlSetPicture(data), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error setPicture: ", err);
             result(null, err);
             return;
         }
@@ -79,7 +79,7 @@ Post.setPicture = (data, result) => {
 Post.deletePost = (id, result) => {
     sql.query(postUtils.sqlDeletePost(id), (err, res) => {
         if (err) {
-            console.log("error: ", err);
+            console.log("error deletePost: ", err);
             result(null, err);
             return;
         }
