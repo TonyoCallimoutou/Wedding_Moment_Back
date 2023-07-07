@@ -44,8 +44,7 @@ CREATE TABLE weddingmomentarchive.Events (
     presentationTextAlign VARCHAR(45) DEFAULT 'center',
     pictureUrl VARCHAR(255),
     eventDate DATE NOT NULL,
-    PRIMARY KEY (eventId),
-    FOREIGN KEY (userId) REFERENCES Users(userId) ON DELETE CASCADE
+    PRIMARY KEY (eventId)
 );
 
 CREATE TABLE weddingmoment.Menus (
@@ -62,8 +61,7 @@ CREATE TABLE weddingmomentarchive.Menus (
     eventId INT NOT NULL,
     menuCategorie VARCHAR(45) NOT NULL,
     menuDescription VARCHAR(45) NOT NULL,
-    PRIMARY KEY (menuId),
-    FOREIGN KEY (eventId) REFERENCES Events (eventId) ON DELETE CASCADE
+    PRIMARY KEY (menuId)
 );
 
 CREATE TABLE weddingmoment.PlanTables (
@@ -78,8 +76,7 @@ CREATE TABLE weddingmomentarchive.PlanTables (
 	planTableId INT AUTO_INCREMENT NOT NULL,
     eventId INT NOT NULL,
 	tableName VARCHAR(45) NOT NULL,
-    PRIMARY KEY (planTableId),
-    FOREIGN KEY (eventId) REFERENCES Events (eventId) ON DELETE CASCADE
+    PRIMARY KEY (planTableId)
 );
 
 CREATE TABLE weddingmoment.Invites (
@@ -93,8 +90,7 @@ CREATE TABLE weddingmomentarchive.Invites (
 	inviteId INT AUTO_INCREMENT NOT NULL,
     planTableId INT NOT NULL,
     inviteName VARCHAR(45) NOT NULL,
-    PRIMARY KEY (inviteId),
-    FOREIGN KEY (planTableId) REFERENCES PlanTables(planTableId) ON DELETE CASCADE
+    PRIMARY KEY (inviteId)
 );
 
 CREATE TABLE weddingmoment.Posts (
@@ -118,9 +114,7 @@ CREATE TABLE weddingmomentarchive.Posts (
     pictureRatio FLOAT NOT NULL,
     countReact INT DEFAULT 0,
     publicationDate datetime DEFAULT NOW(),
-    PRIMARY KEY (postId),
-    FOREIGN KEY (eventId) REFERENCES Events(eventId) ON DELETE CASCADE,
-    FOREIGN KEY (UserId) REFERENCES Users(UserId) ON DELETE CASCADE
+    PRIMARY KEY (postId)
 );
 
 CREATE TABLE weddingmoment.UsersReactPosts (
@@ -213,9 +207,6 @@ CREATE EVENT activate_and_archive_event
             THEN TRUE
 			ELSE FALSE
 		END;
-
-		DELETE FROM weddingmoment.events
-		WHERE eventDate < CURDATE() - INTERVAL 1 YEAR;
 	END $$
 
 DELIMITER $$
