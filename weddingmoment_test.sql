@@ -1,11 +1,11 @@
-Select * from events;
+Select * from e;
 
 INSERT INTO Users (userId, email, userName, emailVerified, photoUrl) 
 	VALUES
 	('vEItJGl0NLO70u9vSfaFPaKUHjV2','email',"TestUser", true, "https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg");
     
 DELETE FROM users 
-	WHERE userId = 'plosjeHZj5Xy9KSXmbKrZ1VfO9I2';
+	WHERE userId = 't33TT2IYCgavOZPGF7OneiBfY1L2';
     
 
 INSERT INTO Users (userId, email, userName, emailVerified, photoUrl) 
@@ -45,7 +45,6 @@ INSERT INTO Menus (eventId, menuCategorie, menuDescription)
     (2,"Entrée",'Bli bla bla bla blabla'),
     (2,"Plat",'Bli bla bla bla blabla'),
     (2,"Dessert",'Bli bla bla bla blabla');
-    
 
 UPDATE posts 
 	SET countReact = countReact + 1 
@@ -57,7 +56,6 @@ UPDATE posts
     
 DELETE FROM posts 
 	WHERE postId = 2;
-
 
 INSERT INTO PlanTables (tableName, eventId) 
 	VALUES

@@ -12,7 +12,7 @@ class EventsUtils {
     static sqlGetEventById(eventId) {
         return `SELECT *
                 FROM Events
-                WHERE eventId = ${eventId}`
+                WHERE eventId = ${eventId} and isActivate = 1`
     }
 
     static sqlUpdateEventPicture(data) {
