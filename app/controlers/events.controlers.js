@@ -2,6 +2,7 @@ const Events = require("../model/events.model.js");
 const sql = require("../model/db");
 const postUtils = require("../config/post.utils");
 const Posts = require("../model/posts.model");
+const {getUserId} = require("../config/auth");
 
 
 function create(body) {
@@ -69,17 +70,26 @@ exports.getEventById = (req, res) => {
         });
     }
 
-    const eventId = req.params.id;
-    console.log(eventId);
 
-    Events.getEventById(eventId, (err, data) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Post."
-            });
-        else res.send(data);
+    getUserId(req, res).then(() => {
+        const userId = req.body.userId;
+        const eventId = req.params.id;
+
+        Events.getEventById(eventId, userId, (err, data) => {
+            if (err)
+                res.status(500).send({
+                    message:
+                      err.message || "Some error occurred while retrieving Post."
+                });
+            else res.send(data);
+        });
+    }).catch((err) => {
+        res.status(500).send({
+            message:
+              err.message || "Some error occurred while retrieving Post."
+        });
     });
+
 }
 
 // Update Event

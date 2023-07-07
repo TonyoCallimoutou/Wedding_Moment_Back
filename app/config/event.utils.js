@@ -9,10 +9,10 @@ class EventsUtils {
                 FROM Events`
     }
 
-    static sqlGetEventById(eventId) {
+    static sqlGetEventById(eventId, userId) {
         return `SELECT *
                 FROM Events
-                WHERE eventId = ${eventId}`
+                WHERE eventId = ${eventId} AND (isActivate = 1 OR userId= "${userId}")`
     }
 
     static sqlUpdateEventPicture(data) {

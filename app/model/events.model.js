@@ -45,8 +45,8 @@ Event.getAllEvent = (result) => {
     })
 }
 
-Event.getEventById= (eventId, result) => {
-    sql.query(eventUtils.sqlGetEventById(eventId), (err, res) => {
+Event.getEventById= (eventId, userId, result) => {
+    sql.query(eventUtils.sqlGetEventById(eventId, userId), (err, res) => {
         if (err || res.length === 0) {
             console.log("error getEventById: ", err);
             result(err, null);

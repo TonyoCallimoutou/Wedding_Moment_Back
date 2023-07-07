@@ -9,6 +9,27 @@ admin.initializeApp({
     credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_JSON_KEY)),
 });
 
+exports.getUserId = (req, res) => {
+  return new Promise((resolve, reject) => {
+    if (req.headers.authorization) {
+      let token = req.headers.authorization.split(' ')[1];
+      getAuth()
+        .verifyIdToken(token)
+        .then((decodedToken) => {
+          req.body.userId = decodedToken.uid;
+          resolve();
+        })
+        .catch((error) => {
+          req.body.userId = null;
+          resolve();
+        });
+    } else {
+      req.body.userId = null;
+      resolve();
+    }
+  });
+}
+
 exports.checkAuth = (req, res, next) => {
     if (req.headers.authorization) {
         let token = req.headers.authorization.split(' ')[1];
