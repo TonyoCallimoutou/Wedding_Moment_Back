@@ -1,7 +1,7 @@
 class EventsUtils {
     static sqlCreateEvent(data) {
-        return `INSERT INTO Events (userId, name)
-                Values ('${data.userId}', "${data.name}")`
+        return `INSERT INTO Events (userId, presentationText, eventDate)
+                Values ('${data.userId}', "${data.presentationText}", "${data.eventDate}")`
     }
 
     static sqlGetAllEvent() {
@@ -14,6 +14,13 @@ class EventsUtils {
                 FROM Events
                 WHERE eventId = ${eventId} AND (isActivate = 1 OR userId= "${userId}")`
     }
+
+    static sqlGetEventByUserId(userId) {
+        return `SELECT *
+                FROM Events
+                WHERE userId = "${userId}"`
+    }
+
 
     static sqlUpdateEventPicture(data) {
         return `UPDATE Events

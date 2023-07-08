@@ -23,8 +23,7 @@ CREATE TABLE weddingmomentarchive.Users (
 
 CREATE TABLE weddingmoment.Events (
 	eventId INT AUTO_INCREMENT NOT NULL,
-    userId VARCHAR(45) NOT NULL,
-    name VARCHAR(45) NOT NULL,
+    userId VARCHAR(45) NOT NULL UNIQUE,
     presentationText TEXT NOT NULL,
     presentationTextSize INT DEFAULT 96,
     presentationTextAlign VARCHAR(45) DEFAULT 'center',

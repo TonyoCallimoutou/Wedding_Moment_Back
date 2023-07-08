@@ -1,4 +1,5 @@
 const { checkAuthAndAdmin, checkAuth} = require("../config/auth");
+const events = require("../controlers/events.controlers");
 module.exports = app => {
     const events = require("../controlers/events.controlers.js");
 
@@ -12,6 +13,9 @@ module.exports = app => {
 
     // Create new Event
     router.post("/", checkAuth, events.createEvent);
+
+    // Retrieve Event
+    router.get("/user/:id", events.getEventByUserId);
 
     // Set Event
     router.put("/setEventPicture", checkAuthAndAdmin, events.updateEventPicture);

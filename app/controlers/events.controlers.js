@@ -14,6 +14,7 @@ function create(body) {
         presentationText: body.presentationText,
         presentationTextSize: body.presentationTextSize,
         presentationTextAlign: body.presentationTextAlign,
+        eventDate: body.eventDate,
         menuId: body.menuId,
         menuCategorie: body.menuCategorie,
         menuDescription: body.menuDescription,
@@ -34,18 +35,24 @@ exports.createEvent = (req, res) => {
         });
     }
 
-    const event = create(req.body);
-
-    // Save Event in the database
-    Events.createEvent(event, (err, result) => {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while creating the Event."
-            });
-        else {
-            res.send(result)
-        }
+    getUserId(req, res).then(() => {
+        const event = create(req.body);
+        // Save Event in the database
+        Events.createEvent(event, (err, result) => {
+            if (err)
+                res.status(500).send({
+                    message:
+                      err.message || "Some error occurred while creating the Event."
+                });
+            else {
+                res.send(result)
+            }
+        });
+    }).catch((err) => {
+        res.status(500).send({
+            message:
+              err.message || "Some error occurred while retrieving Event."
+        });
     });
 };
 
@@ -55,7 +62,7 @@ exports.getAllEvent = (req, res) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving Post."
+                    err.message || "Some error occurred while retrieving Event."
             });
         else res.send(data);
     });
@@ -79,18 +86,34 @@ exports.getEventById = (req, res) => {
             if (err)
                 res.status(500).send({
                     message:
-                      err.message || "Some error occurred while retrieving Post."
+                      err.message || "Some error occurred while retrieving Event."
                 });
             else res.send(data);
         });
     }).catch((err) => {
         res.status(500).send({
             message:
-              err.message || "Some error occurred while retrieving Post."
+              err.message || "Some error occurred while retrieving Event."
         });
     });
 
 }
+
+exports.getEventByUserId = (req, res) => {
+
+    const userId = req.params.id;
+
+    Events.getEventByUserId(userId, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message:
+                  err.message || "Some error occurred while retrieving Event by UserId."
+            });
+        else res.send(data);
+    });
+
+}
+
 
 // Update Event
 exports.updateEventPicture = (req, res) => {
@@ -109,7 +132,7 @@ exports.updateEventPicture = (req, res) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Event."
+                    err.message || "Some error occurred while update the EventPicture."
             });
         else {
             res.send(result)
@@ -133,7 +156,7 @@ exports.updateEventPresentation = (req, res) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Event."
+                    err.message || "Some error occurred while update the EventPresentation."
             });
         else {
             res.send(result)
@@ -188,7 +211,7 @@ exports.createMenu = (req, res) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Event."
+                    err.message || "Some error occurred while creating the Menu."
             });
         else {
             res.send(result)
@@ -213,7 +236,7 @@ exports.updateMenu = (req, res) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Event."
+                    err.message || "Some error occurred while update the Menu"
             });
         else {
             res.send(result)
@@ -229,7 +252,7 @@ exports.getMenu = (req, res) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving Post."
+                    err.message || "Some error occurred while retrieving Menu."
             });
         else res.send(data);
     });
@@ -251,11 +274,11 @@ exports.deleteMenu = (req, res) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found Event with id ${req.params.id}.`
+                    message: `Not found Menu with id ${req.params.id}.`
                 });
             } else {
                 res.status(500).send({
-                    message: "Could not delete Event with id " + req.params.id
+                    message: "Could not delete Menu with id " + req.params.id
                 });
             }
         } else {
@@ -281,7 +304,7 @@ exports.createPlanTable = (req, res) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Event."
+                    err.message || "Some error occurred while creating the PlanTable."
             });
         else {
             res.send(result)
@@ -297,7 +320,7 @@ exports.getPlanTable = (req, res) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving Post."
+                    err.message || "Some error occurred while retrieving PlanTable."
             });
         else res.send(data);
     });
@@ -319,11 +342,11 @@ exports.deletePlanTable = (req, res) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found Event with id ${req.params.id}.`
+                    message: `Not found PlanTable with id ${req.params.id}.`
                 });
             } else {
                 res.status(500).send({
-                    message: "Could not delete Event with id " + req.params.id
+                    message: "Could not delete PlanTable with id " + req.params.id
                 });
             }
         } else {
@@ -349,7 +372,7 @@ exports.createInvite = (req, res) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Event."
+                    err.message || "Some error occurred while creating the Invite."
             });
         else {
             res.send(result)
@@ -362,7 +385,7 @@ exports.setInvite = (req, res) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving Post."
+                    err.message || "Some error occurred while update Invite."
             });
         else res.send(data);
     });
@@ -385,11 +408,11 @@ exports.deleteInvite = (req, res) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
-                    message: `Not found Event with id ${req.params.id}.`
+                    message: `Not found Invite with id ${req.params.id}.`
                 });
             } else {
                 res.status(500).send({
-                    message: "Could not delete Event with id " + req.params.id
+                    message: "Could not delete Invite with id " + req.params.id
                 });
             }
         } else {

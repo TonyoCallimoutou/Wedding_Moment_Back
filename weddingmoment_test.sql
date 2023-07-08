@@ -9,8 +9,11 @@ delete FROM users
     
 INSERT INTO Events (userId, name, presentationText, pictureUrl, eventDate) 
 	VALUES
-    ("t33TT2IYCgavOZPGF7OneiBfY1L2","Test", "Mariage Test", "https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/event%2F0%2Ffond?alt=media&token=3b8ff06c-a13b-46b2-aaa8-845f6142ce20", "2023-07-10"),
+    ("t33TT2IYCgavOZPGF7OneiBfY1L2","Test", "Mariage Test", "https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/event%2F0%2Ffond?alt=media&token=3b8ff06c-a13b-46b2-aaa8-845f6142ce20", "2023-07-10");
     
+SELECT *
+FROM Events
+WHERE eventId = 1 AND (isActivate = 1 OR userId= null);
 
 INSERT INTO Users (userId, email, userName, emailVerified, photoUrl) 
 	VALUES

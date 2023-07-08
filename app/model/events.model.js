@@ -10,6 +10,7 @@ const Event = function (event) {
     this.presentationText = event.presentationText;
     this.presentationTextSize = event.presentationTextSize;
     this.presentationTextAlign = event.presentationTextAlign;
+    this.eventDate = event.eventDate;
     this.menuId = event.menuId;
     this.menuCategorie = event.menuCategorie;
     this.menuDescription = event.menuDescription;
@@ -55,6 +56,18 @@ Event.getEventById= (eventId, userId, result) => {
         result(null, res[0]);
     })
 }
+
+Event.getEventByUserId= (userId, result) => {
+    sql.query(eventUtils.sqlGetEventByUserId(userId), (err, res) => {
+        if (err || res.length === 0) {
+            console.log("error getEventById: ", err);
+            result(err, null);
+            return;
+        }
+        result(null, res[0]);
+    })
+}
+
 
 Event.updateEventPicture = (data, result) => {
     sql.query(eventUtils.sqlUpdateEventPicture(data), (err, res) => {
