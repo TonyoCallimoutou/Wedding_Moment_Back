@@ -8,10 +8,10 @@ INSERT INTO Users (userId, email, userName, emailVerified, photoUrl)
 	('vEItJGl0NLO70u9vSfaFPaKUHjV2','email',"TestUser", true, "https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/users%2FplosjeHZj5Xy9KSXmbKrZ1VfO9I2?alt=media&token=5a6f2f4f-f297-41c8-b3c2-381284936752"),
     ('t33TT2IYCgavOZPGF7OneiBfY1L2',"tcallimoutou@gmail.com","Tonyo Callimoutou",true,"https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/users%2FplosjeHZj5Xy9KSXmbKrZ1VfO9I2?alt=media&token=5a6f2f4f-f297-41c8-b3c2-381284936752");
     
-INSERT INTO Events (userId, presentationText, pictureUrl, eventDate) 
+INSERT INTO Events (userId, presentationText, pictureUrl, eventDate, dateIncrement, eventCode) 
 	VALUES
-    ("t33TT2IYCgavOZPGF7OneiBfY1L2", "Mariage Test", "https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/event%2F0%2Ffond?alt=media&token=3b8ff06c-a13b-46b2-aaa8-845f6142ce20", "2023-07-07"),
-    ("2", "Mariage de Ingrid et Dimitri", "https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/event%2F0%2Ffond?alt=media&token=3b8ff06c-a13b-46b2-aaa8-845f6142ce20","2023-07-08");
+    ("t33TT2IYCgavOZPGF7OneiBfY1L2", "Mariage Test", "https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/event%2F0%2Ffond?alt=media&token=3b8ff06c-a13b-46b2-aaa8-845f6142ce20", "2023-07-07", 1, "0707231"),
+    ("2", "Mariage de Ingrid et Dimitri", "https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/event%2F0%2Ffond?alt=media&token=3b8ff06c-a13b-46b2-aaa8-845f6142ce20","2023-07-08",1, "0807231");
     
 INSERT INTO Menus (eventId, menuCategorie, menuDescription) 
 	VALUES

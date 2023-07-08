@@ -1,7 +1,13 @@
 class EventsUtils {
     static sqlCreateEvent(data) {
-        return `INSERT INTO Events (userId, presentationText, eventDate)
-                Values ('${data.userId}', "${data.presentationText}", "${data.eventDate}")`
+        return `INSERT INTO Events (userId, presentationText, eventDate, dateIncrement, eventCode)
+                Values (
+                        "${data.userId}",
+                        "${data.presentationText}",
+                        "${data.eventDate}",
+                        (SELECT COALESCE(MAX(dateIncrement), 0) + 1 FROM (SELECT dateIncrement FROM Events WHERE eventDate = "${data.eventDate}") AS subquery),
+                        CONCAT(DATE_FORMAT("${data.eventDate}", '%d%m%y'), (SELECT COALESCE(MAX(dateIncrement), 0) + 1 FROM (SELECT dateIncrement FROM Events WHERE eventDate = "${data.eventDate}") AS subquery))
+                        )`
     }
 
     static sqlGetAllEvent() {
@@ -20,6 +26,13 @@ class EventsUtils {
                 FROM Events
                 WHERE userId = "${userId}"`
     }
+
+    static sqlGetEventByCode(code, userId) {
+        return `SELECT *
+                FROM Events
+                WHERE eventCode = ${code} AND (isActivate = 1 OR userId= "${userId}")`
+    }
+
 
 
     static sqlUpdateEventPicture(data) {

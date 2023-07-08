@@ -114,6 +114,33 @@ exports.getEventByUserId = (req, res) => {
 
 }
 
+exports.getEventByCode = (req, res) => {
+
+
+
+    getUserId(req, res).then(() => {
+        const userId = req.body.userId;
+
+        const code = req.params.id;
+
+        Events.getEventByCode(code, userId, (err, data) => {
+            if (err)
+                res.status(500).send({
+                    message:
+                      err.message || "Some error occurred while retrieving Event by UserId."
+                });
+            else res.send(data);
+        });
+    }).catch((err) => {
+        res.status(500).send({
+            message:
+              err.message || "Some error occurred while retrieving Event."
+        });
+    });
+
+
+}
+
 
 // Update Event
 exports.updateEventPicture = (req, res) => {
@@ -123,7 +150,6 @@ exports.updateEventPicture = (req, res) => {
             message: "Content can not be empty!"
         });
     }
-    console.log(req);
 
     const event = create(req.body);
 
@@ -147,7 +173,6 @@ exports.updateEventPresentation = (req, res) => {
             message: "Content can not be empty!"
         });
     }
-    console.log(req);
 
     const event = create(req.body);
 

@@ -28,9 +28,15 @@ Event.createEvent = (newEvent, result) => {
             result(err, null);
             return;
         }
+        sql.query(eventUtils.sqlGetEventById(res.insertId, newEvent.userId), (err, res) => {
+            if (err) {
+                console.log("error createEvent - get event: ", err);
+                result(err, null);
+                return;
+            }
+            result(null, res[0]);
+        });
 
-        newEvent.eventId = res.insertId
-        result(null, newEvent);
 
     });
 };
@@ -59,6 +65,17 @@ Event.getEventById= (eventId, userId, result) => {
 
 Event.getEventByUserId= (userId, result) => {
     sql.query(eventUtils.sqlGetEventByUserId(userId), (err, res) => {
+        if (err || res.length === 0) {
+            console.log("error getEventById: ", err);
+            result(err, null);
+            return;
+        }
+        result(null, res[0]);
+    })
+}
+
+Event.getEventByCode = (code, userId, result) => {
+    sql.query(eventUtils.sqlGetEventByCode(code, userId), (err, res) => {
         if (err || res.length === 0) {
             console.log("error getEventById: ", err);
             result(err, null);

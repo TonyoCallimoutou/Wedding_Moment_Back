@@ -17,6 +17,9 @@ module.exports = app => {
     // Retrieve Event
     router.get("/user/:id", events.getEventByUserId);
 
+    // Retrieve Event
+    router.get("/code/:id", events.getEventByCode);
+
     // Set Event
     router.put("/setEventPicture", checkAuthAndAdmin, events.updateEventPicture);
 

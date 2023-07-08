@@ -1,4 +1,4 @@
-Select * from e;
+Select * from events;
 
 INSERT INTO Users (userId, email, userName, emailVerified, photoUrl) 
 	VALUES
@@ -7,6 +7,7 @@ INSERT INTO Users (userId, email, userName, emailVerified, photoUrl)
 delete FROM users 
 	WHERE userId = 't33TT2IYCgavOZPGF7OneiBfY1L2';
     
+  
 INSERT INTO Events (userId, name, presentationText, pictureUrl, eventDate) 
 	VALUES
     ("t33TT2IYCgavOZPGF7OneiBfY1L2","Test", "Mariage Test", "https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/event%2F0%2Ffond?alt=media&token=3b8ff06c-a13b-46b2-aaa8-845f6142ce20", "2023-07-10");

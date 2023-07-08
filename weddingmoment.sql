@@ -29,20 +29,25 @@ CREATE TABLE weddingmoment.Events (
     presentationTextAlign VARCHAR(45) DEFAULT 'center',
     pictureUrl VARCHAR(255),
     eventDate DATE NOT NULL,
+    dateIncrement INT NOT NULL,
+    eventCode VARCHAR(45) NOT NULL UNIQUE,
     isActivate boolean default false,
     PRIMARY KEY (eventId),
-    FOREIGN KEY (userId) REFERENCES Users(userId) ON DELETE CASCADE
+    FOREIGN KEY (userId) REFERENCES Users(userId) ON DELETE CASCADE,
+    UNIQUE KEY (eventDate, dateIncrement)
 );
 
 CREATE TABLE weddingmomentarchive.Events (
 	eventId INT AUTO_INCREMENT NOT NULL,
-    userId VARCHAR(45) NOT NULL,
-    name VARCHAR(45) NOT NULL,
+    userId VARCHAR(45) NOT NULL UNIQUE,
     presentationText TEXT NOT NULL,
     presentationTextSize INT DEFAULT 96,
     presentationTextAlign VARCHAR(45) DEFAULT 'center',
     pictureUrl VARCHAR(255),
     eventDate DATE NOT NULL,
+    dateIncrement INT NOT NULL,
+    eventCode VARCHAR(45) NOT NULL UNIQUE,
+    isActivate boolean default false,
     PRIMARY KEY (eventId)
 );
 
