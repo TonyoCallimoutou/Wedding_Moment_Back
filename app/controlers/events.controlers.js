@@ -292,8 +292,9 @@ exports.deleteMenu = (req, res) => {
         });
     }
 
-    const menuId = req.params.id;
+    const menuId = req.body.menuId;
 
+    console.log("body = ",req.body);
 
     Events.deleteMenu(menuId, (err, result) => {
         if (err) {
@@ -360,7 +361,7 @@ exports.deletePlanTable = (req, res) => {
         });
     }
 
-    const eventId = req.params.id;
+    const eventId = req.body.planTableId;
 
 
     Events.deletePlanTable(eventId, (err, result) => {
@@ -426,7 +427,7 @@ exports.deleteInvite = (req, res) => {
         });
     }
 
-    const inviteId = req.params.id;
+    const inviteId = req.body.inviteId;
 
 
     Events.deleteInvite(inviteId, (err, result) => {

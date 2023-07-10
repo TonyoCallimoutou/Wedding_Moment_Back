@@ -61,8 +61,10 @@ class EventsUtils {
     }
 
     static sqlUpdateMenu(data) {
-        return `REPLACE INTO Menus (menuId, eventId, menuCategorie, menuDescription)
-                VALUES (${data.menuId}, ${data.eventId}, "${data.menuCategorie}", "${data.menuDescription}")`
+        return `UPDATE Menus
+                SET menuCategorie      = "${data.menuCategorie}",
+                    menuDescription  = "${data.menuDescription}"
+                WHERE menuId = ${data.menuId}`
     }
 
     static sqlGetMenu(eventId) {

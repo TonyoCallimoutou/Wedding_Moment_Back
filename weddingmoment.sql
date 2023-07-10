@@ -200,7 +200,7 @@ CREATE TRIGGER Invite_delete_trigger
 	END $$
     
 DELIMITER $$
-CREATE EVENT activate_and_archive_event
+CREATE EVENT activate_event
 	ON SCHEDULE EVERY 1 DAY
 	STARTS CURRENT_TIMESTAMP + INTERVAL 1 DAY
 	DO

@@ -10,8 +10,8 @@ INSERT INTO Users (userId, email, userName, emailVerified, photoUrl)
     
 INSERT INTO Events (userId, presentationText, pictureUrl, eventDate, dateIncrement, eventCode) 
 	VALUES
-    ("t33TT2IYCgavOZPGF7OneiBfY1L2", "Mariage Test", "https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/event%2F0%2Ffond?alt=media&token=3b8ff06c-a13b-46b2-aaa8-845f6142ce20", "2023-07-07", 1, "0707231"),
-    ("2", "Mariage de Ingrid et Dimitri", "https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/event%2F0%2Ffond?alt=media&token=3b8ff06c-a13b-46b2-aaa8-845f6142ce20","2023-07-08",1, "0807231");
+    ("t33TT2IYCgavOZPGF7OneiBfY1L2", "Mariage Test", "https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/event%2F0%2Ffond?alt=media&token=3b8ff06c-a13b-46b2-aaa8-845f6142ce20", "2023-07-10", 1, "1007231"),
+    ("2", "Mariage de Ingrid et Dimitri", "https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/event%2F0%2Ffond?alt=media&token=3b8ff06c-a13b-46b2-aaa8-845f6142ce20","2023-07-11",1, "0807231");
     
 INSERT INTO Menus (eventId, menuCategorie, menuDescription) 
 	VALUES
