@@ -4,7 +4,7 @@ INSERT INTO Users (userId, email, userName, emailVerified, photoUrl)
 	VALUES
 	('vEItJGl0NLO70u9vSfaFPaKUHjV2','email',"TestUser", true, "https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg");
     
-delete FROM users 
+SELECT *, CURDATE() FROM events 
 	WHERE userId = 't33TT2IYCgavOZPGF7OneiBfY1L2';
     
   
