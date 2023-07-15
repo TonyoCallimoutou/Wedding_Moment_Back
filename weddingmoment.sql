@@ -1,7 +1,7 @@
 drop database if exists weddingmoment;
 drop database if exists weddingmomentarchive;
 create database weddingmoment;
-create database weddingmomentArchive;
+create database weddingmomentarchive;
 
 CREATE TABLE weddingmoment.Users (
 	userId VARCHAR(45) NOT NULL,
