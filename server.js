@@ -43,8 +43,8 @@ let server;
 
 try {
     const options = {
-        cert: fs.readFileSync('/certs/live/app.weddingmoment.me/fullchain.pem'),
-        key: fs.readFileSync('/certs/live/app.weddingmoment.me/privkey.pem')
+        cert: fs.readFileSync('/certs/live/back.weddingmoment.me/fullchain.pem'),
+        key: fs.readFileSync('/certs/live/back.weddingmoment.me/privkey.pem')
     };
 
     server = https.createServer(options, app);
