@@ -1,8 +1,8 @@
+const https = require('https');
 const http = require('http');
 const app = require('./app');
 const socketIo = require("socket.io");
-
-const posts = require("./app/controlers/posts.controlers.js");
+const fs = require('fs');
 
 const normalizePort = val => {
     const port = parseInt(val, 10);
@@ -39,7 +39,19 @@ const errorHandler = error => {
     }
 };
 
-const server = http.createServer(app);
+let server;
+
+try {
+    const options = {
+        cert: fs.readFileSync('/certs/live/app.weddingmoment.me/fullchain.pem'),
+        key: fs.readFileSync('/certs/live/app.weddingmoment.me/privkey.pem')
+    };
+
+    server = https.createServer(options, app);
+}
+catch (e) {
+    server = http.createServer(app);
+}
 
 server.on('error', errorHandler);
 server.on('listening', () => {
