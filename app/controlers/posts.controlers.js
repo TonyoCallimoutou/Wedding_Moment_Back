@@ -9,6 +9,8 @@ exports.createPost = (req, res) => {
         });
     }
 
+    console.log("createPost on EventId: " + req.body.eventId);
+
     const post = new Posts({
         postId: req.body.postId,
         eventId: req.body.eventId,
@@ -36,6 +38,8 @@ exports.createPost = (req, res) => {
 exports.getAllPost = (req, res) => {
     const eventId = req.params.id;
 
+    console.log("getAllPost on EventId: " + eventId);
+
     Posts.getAllPost(eventId, (err, data) => {
         if (err)
             res.status(500).send({
@@ -47,6 +51,9 @@ exports.getAllPost = (req, res) => {
 };
 
 exports.setPictureOfPost = (req, res) => {
+
+    console.log("setPictureOfPost on PostId: " + req.body.postId);
+
     Posts.setPicture(req.body, (err, data) => {
         if (err)
             res.status(500).send({
@@ -60,6 +67,9 @@ exports.setPictureOfPost = (req, res) => {
 
 // Delete Post by Id
 exports.deletePost = (req, res) => {
+
+    console.log("deletePost on PostId: " + req.params.id);
+
     Posts.deletePost(req.params.id, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {

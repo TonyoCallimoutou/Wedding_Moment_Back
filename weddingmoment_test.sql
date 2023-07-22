@@ -1,4 +1,4 @@
-Select * from events;
+
 
 INSERT INTO Users (userId, email, userName, emailVerified, photoUrl) 
 	VALUES
@@ -38,7 +38,7 @@ DELETE FROM users
 	WHERE userId = '1';
     
 
-INSERT INTO Posts (userId, pictureUrl,countLike) 
+INSERT INTO Posts (userId, pictureUrl,countReact)
 	VALUES
     ('1','https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg',2);
 

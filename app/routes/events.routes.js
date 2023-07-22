@@ -44,6 +44,9 @@ module.exports = app => {
     // Create new Event
     router.post("/PlanTable/:id", checkAuthAndAdminOfEvent, events.createPlanTable);
 
+    // Update PlanTable
+    router.put("/PlanTable/:id", checkAuthAndAdminOfEvent, events.updatePlanTable);
+
     // Retrieve PlanTable
     router.get("/PlanTable/:id", events.getPlanTable);
 

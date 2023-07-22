@@ -14,7 +14,7 @@ module.exports = app => {
     router.post("/setter", checkAuthAndAdmin, posts.setPictureOfPost)
 
     // Delete a Posts with id
-    router.delete("/:id", checkAuthAndAdmin, posts.deletePost);
+    router.put("/Delete-Post/:id", checkAuthAndAdmin, posts.deletePost);
 
     app.use('/api/posts', router);
 };

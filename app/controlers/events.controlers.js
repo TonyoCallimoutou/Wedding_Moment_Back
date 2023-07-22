@@ -38,6 +38,7 @@ exports.createEvent = (req, res) => {
     getUserId(req, res).then(() => {
         const event = create(req.body);
         // Save Event in the database
+        console.log("createEvent for userId ", req.body.userId);
         Events.createEvent(event, (err, result) => {
             if (err)
                 res.status(500).send({
@@ -51,18 +52,20 @@ exports.createEvent = (req, res) => {
     }).catch((err) => {
         res.status(500).send({
             message:
-              err.message || "Some error occurred while retrieving Event."
+              err.message || "Some error occurred while retrieving UserId for createEvent."
         });
     });
 };
 
 exports.getAllEvent = (req, res) => {
 
+    console.log("getAllEvent");
+
     Events.getAllEvent((err, data) => {
         if (err)
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving Event."
+                    err.message || "Some error occurred while retrieving Events."
             });
         else res.send(data);
     });
@@ -82,18 +85,20 @@ exports.getEventById = (req, res) => {
         const userId = req.body.userId;
         const eventId = req.params.id;
 
+        console.log("getEventById for userId ", userId, " and eventId ", eventId);
+
         Events.getEventById(eventId, userId, (err, data) => {
             if (err)
                 res.status(500).send({
                     message:
-                      err.message || "Some error occurred while retrieving Event."
+                      err.message || "Some error occurred while retrieving Event for getEventById."
                 });
             else res.send(data);
         });
     }).catch((err) => {
         res.status(500).send({
             message:
-              err.message || "Some error occurred while retrieving Event."
+              err.message || "Some error occurred while retrieving UserId for getEventById."
         });
     });
 
@@ -102,6 +107,9 @@ exports.getEventById = (req, res) => {
 exports.getEventByUserId = (req, res) => {
 
     const userId = req.params.id;
+
+
+    console.log("getEventByUserId of UserId ", userId);
 
     Events.getEventByUserId(userId, (err, data) => {
         if (err)
@@ -116,12 +124,12 @@ exports.getEventByUserId = (req, res) => {
 
 exports.getEventByCode = (req, res) => {
 
-
-
     getUserId(req, res).then(() => {
         const userId = req.body.userId;
 
         const code = req.params.id;
+
+        console.log("getEventByCode for userId ", userId, " and code ", code);
 
         Events.getEventByCode(code, userId, (err, data) => {
             if (err)
@@ -134,7 +142,7 @@ exports.getEventByCode = (req, res) => {
     }).catch((err) => {
         res.status(500).send({
             message:
-              err.message || "Some error occurred while retrieving Event."
+              err.message || "Some error occurred while retrieving UserId for getEventByCode."
         });
     });
 
@@ -152,6 +160,8 @@ exports.updateEventPicture = (req, res) => {
     }
 
     const event = create(req.body);
+
+    console.log("updateEventPicture for eventId ", req.body.eventId);
 
     // Save Event in the database
     Events.updateEventPicture(event, (err, result) => {
@@ -175,6 +185,8 @@ exports.updateEventPresentation = (req, res) => {
     }
 
     const event = create(req.body);
+
+    console.log("updateEventPresentation for eventId ", req.body.eventId)
 
     // Save Event in the database
     Events.updateEventPresentation(event, (err, result) => {
@@ -201,6 +213,7 @@ exports.deleteEvent = (req, res) => {
 
     const eventId = req.params.id;
 
+    console.log("deleteEvent for eventId ", eventId);
 
     Events.deleteEvent(eventId, (err, result) => {
         if (err) {
@@ -230,6 +243,8 @@ exports.createMenu = (req, res) => {
 
     const event = create(req.body);
 
+    console.log("createMenu for eventId ", req.body.eventId);
+
 
     // Save Event in the database
     Events.createMenu(event, (err, result) => {
@@ -255,6 +270,8 @@ exports.updateMenu = (req, res) => {
 
     const event = create(req.body);
 
+    console.log("updateMenu for eventId ", req.body.eventId);
+
 
     // Save Event in the database
     Events.updateMenu(event, (err, result) => {
@@ -272,6 +289,8 @@ exports.updateMenu = (req, res) => {
 exports.getMenu = (req, res) => {
 
     const eventId = req.params.id;
+
+    console.log("getMenu for eventId ", eventId);
 
     Events.getMenu(eventId, (err, data) => {
         if (err)
@@ -294,7 +313,7 @@ exports.deleteMenu = (req, res) => {
 
     const menuId = req.body.menuId;
 
-    console.log("body = ",req.body);
+    console.log("deleteMenu for menuId ", menuId);
 
     Events.deleteMenu(menuId, (err, result) => {
         if (err) {
@@ -324,6 +343,8 @@ exports.createPlanTable = (req, res) => {
 
     const event = create(req.body);
 
+    console.log("createPlanTable for eventId ", req.body.eventId);
+
 
     // Save Event in the database
     Events.createPlanTable(event, (err, result) => {
@@ -338,9 +359,38 @@ exports.createPlanTable = (req, res) => {
     });
 };
 
+// Update Menu
+exports.updatePlanTable = (req, res) => {
+
+    if (!req.body) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+
+    const event = create(req.body);
+
+    console.log("updatePlanTable for eventId ", req.body.eventId);
+
+
+    // Save Event in the database
+    Events.updatePlanTable(event, (err, result) => {
+        if (err)
+            res.status(500).send({
+                message:
+                  err.message || "Some error occurred while update the Menu"
+            });
+        else {
+            res.send(result)
+        }
+    });
+};
+
 exports.getPlanTable = (req, res) => {
 
     const eventId = req.params.id;
+
+    console.log("getPlanTable for eventId ", eventId);
 
     Events.getPlanTable(eventId, (err, data) => {
         if (err)
@@ -362,6 +412,8 @@ exports.deletePlanTable = (req, res) => {
     }
 
     const eventId = req.body.planTableId;
+
+    console.log("deletePlanTable for eventId ", eventId);
 
 
     Events.deletePlanTable(eventId, (err, result) => {
@@ -392,6 +444,8 @@ exports.createInvite = (req, res) => {
 
     const event = create(req.body);
 
+    console.log("createInvite for planTableId ", req.body.planTableId);
+
 
     // Save Event in the database
     Events.createInvite(event, (err, result) => {
@@ -407,6 +461,9 @@ exports.createInvite = (req, res) => {
 };
 
 exports.setInvite = (req, res) => {
+
+    console.log("setInvite for inviteId ", req.body.inviteId);
+
     Events.setInvite(req.body, (err, data) => {
         if (err)
             res.status(500).send({
@@ -428,6 +485,8 @@ exports.deleteInvite = (req, res) => {
     }
 
     const inviteId = req.body.inviteId;
+
+    console.log("deleteInvite for inviteId ", inviteId);
 
 
     Events.deleteInvite(inviteId, (err, result) => {

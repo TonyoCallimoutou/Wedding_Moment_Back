@@ -194,6 +194,19 @@ Event.createPlanTable = (data, result) => {
     });
 };
 
+Event.updatePlanTable = (data, result) => {
+    sql.query(eventUtils.sqlUpdatePlanTable(data), (err, res) => {
+        if (err) {
+            console.log("error updateMenu: ", err);
+            result(err, null);
+            return;
+        }
+        data.menuId = res.insertId
+        result(null, data);
+    });
+};
+
+
 Event.getPlanTable = (id, result) => {
     sql.query(eventUtils.sqlGetPlanTable(id), (err, res) => {
         if (err) {

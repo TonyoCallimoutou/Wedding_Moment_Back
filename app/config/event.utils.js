@@ -6,7 +6,7 @@ class EventsUtils {
                         "${data.presentationText}",
                         "${data.eventDate}",
                         (SELECT COALESCE(MAX(dateIncrement), 0) + 1 FROM (SELECT dateIncrement FROM Events WHERE eventDate = "${data.eventDate}") AS subquery),
-                        CONCAT(DATE_FORMAT("${data.eventDate}", '%d%m%y'), (SELECT COALESCE(MAX(dateIncrement), 0) + 1 FROM (SELECT dateIncrement FROM Events WHERE eventDate = "${data.eventDate}") AS subquery))
+                        CONCAT((SELECT COALESCE(MAX(dateIncrement), 0) + 1 FROM (SELECT dateIncrement FROM Events WHERE eventDate = "${data.eventDate}") AS subquery), DATE_FORMAT("${data.eventDate}", '%d%m%y'))
                         )`
     }
 
@@ -82,6 +82,12 @@ class EventsUtils {
     static sqlCreatePlanTable(data) {
         return `INSERT INTO PlanTables (tableName, eventId)
                 VALUES ("${data.tableName}", ${data.eventId})`
+    }
+
+    static sqlUpdatePlanTable(data) {
+        return `UPDATE PlanTables
+                SET tableName      = "${data.tableName}"    
+                WHERE planTableId = ${data.planTableId}`
     }
 
     static sqlGetPlanTable(eventId) {
