@@ -1,4 +1,4 @@
-
+SELECT * from PlanTables;
 
 INSERT INTO Users (userId, email, userName, emailVerified, photoUrl) 
 	VALUES

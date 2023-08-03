@@ -200,7 +200,7 @@ CREATE TRIGGER Invite_delete_trigger
 	END $$
     
 DELIMITER $$
-CREATE EVENT activate_event
+CREATE EVENT activate_event_schedule
 	ON SCHEDULE EVERY 1 DAY
 	STARTS CURRENT_TIMESTAMP + INTERVAL 1 DAY
 	DO
@@ -214,12 +214,12 @@ CREATE EVENT activate_event
 	END $$
 
 DELIMITER $$
-CREATE TRIGGER create_event_archive
+CREATE TRIGGER activate_event
 	BEFORE INSERT ON Events
 	FOR EACH ROW
 	BEGIN
     SET NEW.isActivate = CASE
-        WHEN NEW.eventDate = CURDATE() 
+        WHEN NEW.eventDate = CURDATE() OR NEW.eventDate = CURDATE() + INTERVAL 1 DAY 
         THEN TRUE
         ELSE FALSE
     END;
