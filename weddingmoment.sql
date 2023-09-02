@@ -55,7 +55,7 @@ CREATE TABLE weddingmoment.Menus (
 	menuId INT AUTO_INCREMENT NOT NULL,
     eventId INT NOT NULL,
     menuCategorie VARCHAR(45) NOT NULL,
-    menuDescription VARCHAR(45) NOT NULL,
+    menuDescription VARCHAR(255) NOT NULL,
     PRIMARY KEY (menuId),
     FOREIGN KEY (eventId) REFERENCES Events (eventId) ON DELETE CASCADE
 );
@@ -133,32 +133,32 @@ CREATE TABLE weddingmoment.UsersReactPosts (
 use weddingmoment;
 
 DELIMITER $$
-CREATE TRIGGER Users_delete_trigger 
+CREATE TRIGGER Users_delete_trigger
 	BEFORE DELETE ON weddingmoment.Users
 	FOR EACH ROW
 	BEGIN
 		INSERT INTO weddingmomentarchive.Users(userId, email, userName, photoUrl, emailVerified)
         VALUES (old.userId, old.email, old.userName, old.photoUrl, emailVerified);
-        
+
 		DELETE FROM weddingmoment.Events WHERE weddingmoment.Events.userId = old.userId;
 	END $$
-    
-    
+
+
 DELIMITER $$
-CREATE TRIGGER Event_delete_trigger 
+CREATE TRIGGER Event_delete_trigger
 	BEFORE DELETE ON weddingmoment.Events
 	FOR EACH ROW
 	BEGIN
-		INSERT INTO weddingmomentarchive.Events 
-        SELECT * from weddingmoment.Events 
+		INSERT INTO weddingmomentarchive.Events
+        SELECT * from weddingmoment.Events
         WHERE weddingmoment.Events.eventId = old.eventId;
-        
+
 		DELETE FROM weddingmoment.Menus WHERE weddingmoment.Menus.eventId = old.eventId;
 		DELETE FROM weddingmoment.PlanTables WHERE weddingmoment.PlanTables.eventId = old.eventId;
 	END $$
-    
+
 DELIMITER $$
-CREATE TRIGGER Menu_delete_trigger 
+CREATE TRIGGER Menu_delete_trigger
 	BEFORE DELETE ON weddingmoment.Menus
 	FOR EACH ROW
 	BEGIN
@@ -166,31 +166,31 @@ CREATE TRIGGER Menu_delete_trigger
         SELECT * from weddingmoment.Menus
         WHERE weddingmoment.Menus.menuId = old.menuId;
 	END $$
-    
+
 DELIMITER $$
-CREATE TRIGGER PlanTable_delete_trigger 
+CREATE TRIGGER PlanTable_delete_trigger
 	BEFORE DELETE ON weddingmoment.PlanTables
 	FOR EACH ROW
 	BEGIN
-		INSERT INTO weddingmomentarchive.PlanTables 
-        SELECT * from weddingmoment.PlanTables 
+		INSERT INTO weddingmomentarchive.PlanTables
+        SELECT * from weddingmoment.PlanTables
         WHERE weddingmoment.PlanTables.planTableId = old.planTableId;
-        
+
         DELETE FROM weddingmoment.Invites WHERE weddingmoment.Invites.planTableId = old.planTableId;
 	END $$
-    
+
 DELIMITER $$
-CREATE TRIGGER Posts_delete_trigger 
+CREATE TRIGGER Posts_delete_trigger
 	BEFORE DELETE ON weddingmoment.Posts
 	FOR EACH ROW
 	BEGIN
-		INSERT INTO weddingmomentarchive.Posts 
-        SELECT * from weddingmoment.Posts 
+		INSERT INTO weddingmomentarchive.Posts
+        SELECT * from weddingmoment.Posts
         WHERE weddingmoment.Posts.postId = old.postId;
 	END $$
 
 DELIMITER $$
-CREATE TRIGGER Invite_delete_trigger 
+CREATE TRIGGER Invite_delete_trigger
 	BEFORE DELETE ON weddingmoment.Invites
 	FOR EACH ROW
 	BEGIN
@@ -198,7 +198,7 @@ CREATE TRIGGER Invite_delete_trigger
         SELECT * from weddingmoment.Invites
         WHERE weddingmoment.Invites.inviteId = old.inviteId;
 	END $$
-    
+
 DELIMITER $$
 CREATE EVENT activate_event_schedule
 	ON SCHEDULE EVERY 1 DAY
@@ -207,7 +207,7 @@ CREATE EVENT activate_event_schedule
 	BEGIN
 		UPDATE weddingmoment.events
 		SET isActivate = CASE
-			WHEN eventDate = CURDATE() OR eventDate = CURDATE() + INTERVAL 1 DAY 
+			WHEN eventDate = CURDATE() OR eventDate = CURDATE() + INTERVAL 1 DAY
             THEN TRUE
 			ELSE FALSE
 		END;
@@ -219,12 +219,8 @@ CREATE TRIGGER activate_event
 	FOR EACH ROW
 	BEGIN
     SET NEW.isActivate = CASE
-        WHEN NEW.eventDate = CURDATE() OR NEW.eventDate = CURDATE() + INTERVAL 1 DAY 
+        WHEN NEW.eventDate = CURDATE() OR NEW.eventDate = CURDATE() + INTERVAL 1 DAY
         THEN TRUE
         ELSE FALSE
     END;
 	END $$
-    
-
-
-    
