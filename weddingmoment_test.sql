@@ -1,4 +1,29 @@
-SELECT * from PlanTables;
+delete from posts where userId = 'WMRVN07MEfdRIJHkIbr0cwKm4oD3' ;
+select * from events;
+select * from users;
+
+select * from posts;
+
+
+SELECT *
+FROM Posts
+NATURAL JOIN Users
+WHERE eventId = 1
+AND pictureUrl <> ''
+AND publicationDate < IFNULL("undefined", NOW())
+ORDER BY publicationDate DESC
+LIMIT 2;
+
+SELECT *
+	FROM Posts
+	NATURAL JOIN Users
+    WHERE eventId = 1
+    and pictureUrl <> ''
+    and publicationDate < '2023-09-10T12:12:19.440Z'
+	ORDER BY publicationDate DESC
+    LIMIT 10 ;
+
+Delete from users where userId='t33TT2IYCgavOZPGF7OneiBfY1L2';
 
 INSERT INTO Users (userId, email, userName, emailVerified, photoUrl) 
 	VALUES

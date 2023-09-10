@@ -8,7 +8,7 @@ module.exports = app => {
     router.post("/", checkAuth, posts.createPost);
 
     // Retrieve all Posts
-    router.get("/event/:id", checkAuth, posts.getAllPost);
+    router.post("/event/:id", checkAuth, posts.getAllPost);
 
     // Change Picture of Post
     router.post("/setter", checkAuthAndAdmin, posts.setPictureOfPost)

@@ -28,8 +28,8 @@ Post.createPost = (newPost, result) => {
 };
 
 // Retrieve all Post
-Post.getAllPost = (eventId, result) => {
-    sql.query(postUtils.sqlGetAllPost(eventId), (err, res) => {
+Post.getAllPost = (eventId, dateLastPost, result) => {
+    sql.query(postUtils.sqlGetAllPost(eventId, dateLastPost), (err, res) => {
         if (err) {
             console.log("error getAllPost: ", err);
             result(err, null);
@@ -84,7 +84,7 @@ Post.deletePost = (id, result) => {
             return;
         }
 
-        if (res.affectedRows == 0) {
+        if (res.affectedRows === 0) {
             result({kind: "not_found"}, null);
             return;
         }

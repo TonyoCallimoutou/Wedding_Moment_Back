@@ -4,14 +4,16 @@ class PostUtils {
                 Values ('${data.userId}', ${data.eventId}, "${data.pictureUrl}", ${data.pictureRatio})`
     }
 
-    static sqlGetAllPost(eventId) {
+    static sqlGetAllPost(eventId, dateLastPost) {
         return `SELECT *
                 FROM Posts
-                         NATURAL JOIN Users
+                    NATURAL JOIN Users
                 WHERE eventId = ${eventId}
-                ORDER BY publicationDate DESC`
+                AND pictureUrl <> ''
+                AND publicationDate < IF("${dateLastPost}" <> '', "${dateLastPost}", NOW())
+                ORDER BY publicationDate DESC
+                LIMIT 10`
     }
-
 
     static sqlReactPost(postId) {
         return `UPDATE Posts

@@ -38,9 +38,11 @@ exports.createPost = (req, res) => {
 exports.getAllPost = (req, res) => {
     const eventId = req.params.id;
 
-    console.log("getAllPost on EventId: " + eventId);
+    const dateLastPost = req.body.dateLastPost ? req.body.dateLastPost : '';
 
-    Posts.getAllPost(eventId, (err, data) => {
+    console.log("getAllPost on EventId: " + eventId, "and dateLastPost: " + dateLastPost);
+
+    Posts.getAllPost(eventId, dateLastPost, (err, data) => {
         if (err)
             res.status(500).send({
                 message:
