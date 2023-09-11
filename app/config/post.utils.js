@@ -9,6 +9,7 @@ class PostUtils {
                 FROM Posts
                     NATURAL JOIN Users
                 WHERE eventId = ${eventId}
+                AND isReported = 0
                 AND pictureUrl <> ''
                 AND publicationDate < IF("${dateLastPost}" <> '', "${dateLastPost}", NOW())
                 ORDER BY publicationDate DESC
@@ -31,6 +32,11 @@ class PostUtils {
         return `UPDATE Posts
                 SET pictureUrl = "${data.pictureUrl}"
                 WHERE postId = ${data.postId}`
+    }
+
+    static sqlReportedPost(data) {
+        return `INSERT INTO Report (postId, userId, type, reason)
+                Values (${data.postId}, "${data.userId}", "${data.type}", "${data.reason}")`
     }
 
     static sqlDeletePost(postId) {

@@ -75,6 +75,17 @@ Post.setPicture = (data, result) => {
     });
 }
 
+Post.reportedPost = (data, result) => {
+    sql.query(postUtils.sqlReportedPost(data), (err, res) => {
+        if (err) {
+            console.log("error report: ", err);
+            result(null, err);
+            return;
+        }
+        result(null, res);
+    });
+}
+
 // Delete Post by Id
 Post.deletePost = (id, result) => {
     sql.query(postUtils.sqlDeletePost(id), (err, res) => {

@@ -105,6 +105,7 @@ CREATE TABLE weddingmoment.Posts (
     pictureRatio FLOAT NOT NULL,
     countReact INT DEFAULT 0,
     publicationDate datetime DEFAULT NOW(),
+    isReported boolean default false,
     PRIMARY KEY (postId),
     FOREIGN KEY (eventId) REFERENCES Events(eventId) ON DELETE CASCADE,
     FOREIGN KEY (UserId) REFERENCES Users(UserId) ON DELETE CASCADE
@@ -118,7 +119,19 @@ CREATE TABLE weddingmomentarchive.Posts (
     pictureRatio FLOAT NOT NULL,
     countReact INT DEFAULT 0,
     publicationDate datetime DEFAULT NOW(),
+    isReported boolean default false,
     PRIMARY KEY (postId)
+);
+
+CREATE TABLE weddingmoment.report (
+	reportId INT AUTO_INCREMENT NOT NULL,
+    postId INT NOT NULL,
+    userId VARCHAR(45) NOT NULL,
+    type VARCHAR(45) NOT NULL,
+    reason VARCHAR(255) NOT NULL,
+    PRIMARY KEY (reportId),
+    FOREIGN KEY (UserId) REFERENCES Users(UserId) ON DELETE CASCADE,
+    FOREIGN KEY (postId) REFERENCES Posts(postId) ON DELETE CASCADE
 );
 
 CREATE TABLE weddingmoment.UsersReactPosts (
@@ -223,4 +236,15 @@ CREATE TRIGGER activate_event
         THEN TRUE
         ELSE FALSE
     END;
-	END $$
+END $$
+    
+DELIMITER $$
+CREATE TRIGGER signale_posts
+	BEFORE INSERT ON weddingmoment.report
+	FOR EACH ROW
+	BEGIN
+		UPDATE weddingmoment.Posts
+		set isReported = 1
+		WHERE postId = NEW.postId;
+END $$
+    

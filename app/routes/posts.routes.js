@@ -13,6 +13,9 @@ module.exports = app => {
     // Change Picture of Post
     router.post("/setter", checkAuthAndAdmin, posts.setPictureOfPost)
 
+    //reported post
+    router.post("/report", checkAuth, posts.reportedPost)
+
     // Delete a Posts with id
     router.put("/Delete-Post/:id", checkAuthAndAdmin, posts.deletePost);
 

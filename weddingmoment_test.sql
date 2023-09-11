@@ -4,6 +4,15 @@ select * from users;
 
 select * from posts;
 
+select * from report;
+
+select * from posts
+where isReported = true;
+
+INSERT INTO report (postId, userId, type, reason)
+	VALUES
+    (24,"WMRVN07MEfdRIJHkIbr0cwKm4oD3",'because','Bla bla bla bla blabla');
+
 
 SELECT *
 FROM Posts

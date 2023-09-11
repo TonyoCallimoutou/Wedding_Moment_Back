@@ -66,6 +66,20 @@ exports.setPictureOfPost = (req, res) => {
     });
 }
 
+exports.reportedPost = (req, res) => {
+
+    console.log("reported PostId: " + req.body.postId);
+
+    Posts.reportedPost(req.body, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message:
+                  err.message || "Some error occurred while retrieving Post."
+            });
+        else res.send(data);
+    });
+}
+
 
 // Delete Post by Id
 exports.deletePost = (req, res) => {
