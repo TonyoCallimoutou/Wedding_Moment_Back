@@ -146,7 +146,6 @@ Event.updateMenu = (data, result) => {
             result(err, null);
             return;
         }
-        data.menuId = res.insertId
         result(null, data);
     });
 };

@@ -4,6 +4,8 @@ select * from users;
 
 select * from posts;
 
+delete from posts where pictureUrl = 'https://cdn.pixabay.com/photo/2015/05/31/16/03/teddy-bear-792273_1280.jpg';
+
 select * from report;
 
 select * from posts
@@ -19,9 +21,9 @@ FROM Posts
 NATURAL JOIN Users
 WHERE eventId = 1
 AND pictureUrl <> ''
-AND publicationDate < IFNULL("undefined", NOW())
-ORDER BY publicationDate DESC
-LIMIT 2;
+AND isReported <> 1
+AND publicationDate < now()
+ORDER BY publicationDate DESC;
 
 SELECT *
 	FROM Posts
