@@ -11,7 +11,7 @@ INSERT INTO Users (userId, email, userName, emailVerified, photoUrl)
 
 INSERT INTO Events (userId, presentationText, pictureUrl, eventDate, dateIncrement, eventCode)
 	VALUES 
-	('WMRVN07MEfdRIJHkIbr0cwKm4oD3','Mariage\nde\nIngrid\net\nDimitri','https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/event%2F1%2Ffond?alt=media&token=e4120bf5-aabb-4439-8b17-f954e5722c74','2023-10-04',1,'1041023'),
+	('WMRVN07MEfdRIJHkIbr0cwKm4oD3','Mariage\nde\nIngrid\net\nDimitri','https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/event%2F1%2Ffond?alt=media&token=e4120bf5-aabb-4439-8b17-f954e5722c74','2023-10-05',1,'1051023'),
     ("2", "Mariage de Ingrid et Dimitri", "https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/event%2F1%2Ffond?alt=media&token=139864c9-d0d5-49c0-a322-693d74d6eda8","2023-08-01",2, "2010823");
 
 
@@ -19,9 +19,9 @@ INSERT INTO Events (userId, presentationText, pictureUrl, eventDate, dateIncreme
 
 INSERT INTO Menus (eventId, menuCategorie, menuDescription)
 	VALUES
-    (1,'Entrée','Crème de navet caramélisé aux essences d\'érable'),
-    (1,'Plat','Dinde farcie aux fruits sec et ses garnitures'),
-    (1,'Dessert','Pièce montée des mariés\naccompagné de profiteroles glacées');
+    (1,'Appéritifs','Accras de morue\nCrevette et pomme de terre\nCroustillant de songe\nMini-Pizza aux légumes\nNem aux légumes\nQuiche au thon'),
+    (1,'Buffet Froid','Borchettes de poulet\nGratin de chouchou\nSalade de la mer\nSalade du chef\nTomate Mozza\nVindaye de thon'),
+    (1,'Buffet Chaud','Cabris Massale\nSauté de poissons\nPoulet Croustillant');
 
 
 INSERT INTO PlanTables (tableName, eventId)
@@ -33,26 +33,92 @@ INSERT INTO PlanTables (tableName, eventId)
     ("Table 5",1),
     ("Table 6",1),
     ("Table 7",1),
-    ("Table 8",1),
-    ("Table 9",1),
-    ("Table 10",1),
-    ("Table 11",1),
-    ("Table 12",1);
+    ("Table 8",1);
 
 INSERT INTO Invites (planTableId, inviteName)
 	VALUES
-    (1,'Callimoutou Tonyo'),
-    (1,'Callimoutou Yolande'),
-    (1,'Hoarau Marc'),
-    (1,'Hoarau Flora'),
-    (1,'Hoarau Sabine'),
-    (1,'Hoarau Didier'),
-    (1,'Techer Maryvonne'),
-	(2,'Callimoutou Fabrice'),
-    (2,'Callimoutou Maeva'),
-    (2,'Callimoutou Julien');
+(1, "Yolande"),
+(1, "Thierry"),
+(1, "Keylia"),
+(1, "Maryvonne"),
+(1, "Dominique"),
+(1, "Sabine"),
+(1, "Didier"),
+(1, "Fabrice"),
+(1, "Marylin"),
+(1, "Mael"),
+(1, "Clea"),
+(2, "Eleonor"),
+(2, "Daniel"),
+(2, "Irene"),
+(2, "Joelle"),
+(2, "Cleo"),
+(2, "Germain"),
+(2, "Michelle"),
+(2, "Lucas"),
+(3, "Josiane"),
+(3, "Fabrice"),
+(3, "Maeva"),
+(3, "Djulyan"),
+(3, "Julien"),
+(3, "Danielle"),
+(3, "Jean-Paul"),
+(3, "Regis"),
+(3, "Jennifer"),
+(3, "Morgan"),
+(3, "Rafael"),
+(4, "Tonyo"),
+(4, "Jennifer"),
+(4, "Flora"),
+(4, "Gilles"),
+(4, "Marc"),
+(4, "Aicha"),
+(4, "Kamilla"),
+(4, "Audrey"),
+(4, "Loanne"),
+(5, "Cyril"),
+(5, "Magalie"),
+(5, "Romain"),
+(5, "Gauthier"),
+(5, "Aniel"),
+(5, "Dominique"),
+(5, "Anais"),
+(5, "Murielle"),
+(5, "Teddy"),
+(5, "Jules"),
+(6, "Davy"),
+(6, "Laurie"),
+(6, "Steven"),
+(6, "Caroline"),
+(6, "Channel"),
+(6, "Nila"),
+(6, "Anaelle"),
+(6, "Vincent"),
+(6, "Elena"),
+(6, "Thony"),
+(7, "Amandine"),
+(7, "Valery"),
+(7, "Christelle"),
+(7, "Eddy"),
+(7, "Angelica"),
+(7, "Thierry"),
+(7, "Kim"),
+(7, "Leila"),
+(7, "Kersley"),
+(7, "Shayley"),
+(8, "Julien"),
+(8, "Gaelle"),
+(8, "Romain"),
+(8, "Caroline"),
+(8, "Coralie"),
+(8, "Regis"),
+(8, "Henri"),
+(8, "Helene"),
+(8, "Jean-Claude"),
+(8, "Valerie");
 
-INSERT INTO POSTS 
+
+INSERT INTO Posts
 	VALUES 
     (24,'WMRVN07MEfdRIJHkIbr0cwKm4oD3',1,'https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/event%2F1%2FWMRVN07MEfdRIJHkIbr0cwKm4oD3%2F24?alt=media&token=c570b3d0-319f-496e-ac62-fe1a3725dcbe',0.5,1,'2023-10-03 19:00:19',0),
     (25,'WMRVN07MEfdRIJHkIbr0cwKm4oD3',1,'https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/event%2F1%2FWMRVN07MEfdRIJHkIbr0cwKm4oD3%2F25?alt=media&token=00657f9f-6115-42c1-bc03-4a83086b2993',1,0,'2023-10-03 19:42:34',0),
