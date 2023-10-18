@@ -41,6 +41,7 @@ const errorHandler = error => {
 
 let server;
 
+// CERTBOT
 try {
     const options = {
         cert: fs.readFileSync('/certs/live/back.weddingmoment.me/fullchain.pem'),

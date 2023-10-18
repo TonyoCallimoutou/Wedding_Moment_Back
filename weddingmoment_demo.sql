@@ -2,6 +2,7 @@ use weddingmoment;
 
 INSERT INTO Users (userId, email, userName, emailVerified, photoUrl)
 	VALUES
+    ('WMRVN07MEfdRIJHkIbr0cwKm4oD3',"tonyo.callimoutou@hotmail.fr","Tonyo Callimoutou",true,"https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/users%2F0?alt=media&token=da247115-af2f-466d-b4e7-526d1860bec6"),
     ('6rzllHDKI9SIMZYUwhmjPkFiKyk2',"tcallimoutou@gmail.com","Tonyo Callimoutou",true,"https://firebasestorage.googleapis.com/v0/b/projet-secret-a86d6.appspot.com/o/users%2F0?alt=media&token=da247115-af2f-466d-b4e7-526d1860bec6");
 
 INSERT INTO Events (userId, presentationText, pictureUrl, eventDate, dateIncrement, eventCode)
